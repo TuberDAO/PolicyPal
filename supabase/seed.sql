@@ -1,0 +1,2 @@
+-- PolicyPal seed data for local development.
+-- Will be populated after the schema migration is created.
