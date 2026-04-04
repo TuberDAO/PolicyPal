@@ -1,27 +1,35 @@
+import { redirect, notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { createClient } from "@/lib/supabase/server";
+import { UploadForm } from "@/components/case/upload-form";
 
 export const metadata: Metadata = { title: "Upload Documents" };
 
-/**
- * Upload page — optional document upload before checkout.
- * Uploads are authenticated (post-sign-in). Max 10 files per batch, 15 MB each.
- * Allowed: JPG, PNG, HEIC, PDF.
- * Implementation will be added in the upload phase.
- */
-export default function UploadPage({
+export default async function UploadPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  void params;
-  return (
-    <div className="mx-auto w-full max-w-lg space-y-6">
-      <h1 className="text-2xl font-semibold tracking-tight">
-        Upload Documents
-      </h1>
-      <p className="text-sm text-muted">
-        Upload zone will appear here. You can also skip this step.
-      </p>
-    </div>
-  );
+  const { id } = await params;
+  const supabase = await createClient();
+
+  const { data: caseRow } = await supabase
+    .from("cases")
+    .select("id, status")
+    .eq("id", id)
+    .single();
+
+  if (!caseRow) notFound();
+
+  if (caseRow.status !== "draft") {
+    redirect(`/case/${id}/checkout`);
+  }
+
+  const { data: existingFiles } = await supabase
+    .from("case_files")
+    .select("id, original_filename, mime_type, size_bytes")
+    .eq("case_id", id)
+    .order("uploaded_at", { ascending: true });
+
+  return <UploadForm caseId={id} existingFiles={existingFiles ?? []} />;
 }

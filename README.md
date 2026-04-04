@@ -6,6 +6,11 @@ PolicyPal is a mobile-first paid service for U.S. consumers dealing with health-
 
 This is v1 — a manual concierge-style service, not a self-serve AI product.
 
+## Project documentation
+
+- **[Product & flow source of truth](docs/source-of-truth.md)** — what PolicyPal is, approved funnel, pricing, turnaround, auth, statuses, and locked decisions.
+- **[Style guide](docs/style-guide.md)** — fonts, color tokens, mobile-first UI rules, and what to avoid.
+
 ## Stack
 
 | Layer | Technology |
