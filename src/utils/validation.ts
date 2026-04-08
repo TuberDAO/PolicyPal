@@ -19,7 +19,7 @@ export const ISSUE_TYPES = [
   "not_sure",
 ] as const;
 
-export const TURNAROUND_TYPES = ["standard", "rush"] as const;
+export const TURNAROUND_TYPES = ["quick_question", "standard", "rush"] as const;
 
 export const US_STATE_CODES = [
   "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",

@@ -36,10 +36,17 @@ Order is fixed:
 
 | Offering | Price (USD) |
 |----------|----------------|
-| Standard (Full Case Pack) | **$67** promo / **$99** regular |
-| Rush | **$149** |
+| Quick Question | **$19** |
+| Full Case Pack (Standard) | **$67** promo / **$99** regular |
+| Rush Review | **$149** |
 
-Promo vs regular for standard is controlled **manually** (e.g. Stripe price IDs / env)—**no automated “first 100 customers” or cohort logic** in the product.
+**Quick Question** is for one specific insurance, billing, or benefits question — a single clear written answer. It is not a full case review, escalation pack, or deep document review.
+
+**Full Case Pack** is the primary offering: full review, detailed action plan, scripts, and escalation strategy when needed.
+
+**Rush Review** is the same depth as Full Case Pack, delivered within 1 business day.
+
+Promo vs regular for Full Case Pack is controlled **manually** (e.g. Stripe price IDs / env)—**no automated “first 100 customers” or cohort logic** in the product.
 
 ## Turnaround
 

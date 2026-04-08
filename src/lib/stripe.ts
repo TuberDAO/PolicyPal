@@ -1,12 +1,17 @@
 /**
  * Stripe server client — for creating Checkout Sessions and verifying webhooks.
  * ONLY used in server actions and API routes.
- * Implementation will be added in the Stripe phase.
  */
 
-// import Stripe from "stripe";
-// import { getServerEnv } from "@/env";
+import Stripe from "stripe";
+import { getServerEnv } from "@/env";
 
-export function getStripe() {
-  throw new Error("Stripe client not yet configured");
+let cached: Stripe | null = null;
+
+export function getStripe(): Stripe {
+  if (!cached) {
+    const { STRIPE_SECRET_KEY } = getServerEnv();
+    cached = new Stripe(STRIPE_SECRET_KEY);
+  }
+  return cached;
 }

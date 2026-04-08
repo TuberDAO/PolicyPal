@@ -9,13 +9,13 @@ export function HeroSection() {
         </h1>
 
         <p className="mt-6 text-lg leading-relaxed text-muted sm:text-xl">
-          We review denied claims and medical bills and show you exactly what to
-          do next.
+          We review your situation and build a step-by-step plan — who to
+          contact, what to say, and how to escalate when needed.
         </p>
 
         <p className="mt-4 text-base leading-relaxed text-muted">
           Tell us what happened, upload anything useful, and we&rsquo;ll map out
-          the best next steps for your case.
+          the best path forward for your case.
         </p>
 
         <p className="mt-4 text-sm font-medium text-accent">

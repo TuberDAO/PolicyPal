@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Link from "next/link";
 import { ISSUE_TYPE_LABELS, PRICING, TURNAROUND, FLAGS } from "@/constants";
 import { updateTurnaround, createCheckoutSession } from "@/actions/checkout";
 import type { TurnaroundType, IssueType } from "@/types";
@@ -65,9 +66,11 @@ export function CheckoutSummary({
       : description;
 
   const currentPrice =
-    turnaround === "rush"
-      ? PRICING.RUSH_PRICE_USD
-      : PRICING.STANDARD_PROMO_PRICE_USD;
+    turnaround === "quick_question"
+      ? PRICING.QUICK_QUESTION_PRICE_USD
+      : turnaround === "rush"
+        ? PRICING.RUSH_PRICE_USD
+        : PRICING.STANDARD_PROMO_PRICE_USD;
 
   return (
     <div className="space-y-6">
@@ -109,6 +112,22 @@ export function CheckoutSummary({
         </div>
       </section>
 
+      {/* Pre-payment edit links */}
+      <div className="flex gap-4 text-sm">
+        <Link
+          href={`/case/${caseId}/edit`}
+          className="text-accent underline-offset-2 hover:underline"
+        >
+          Edit details
+        </Link>
+        <Link
+          href={`/case/${caseId}/upload`}
+          className="text-accent underline-offset-2 hover:underline"
+        >
+          Manage documents
+        </Link>
+      </div>
+
       {/* Reassurance */}
       <p className="flex items-start gap-2 rounded-lg bg-accent-light px-4 py-3 text-xs leading-relaxed text-muted">
         <SavedIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />
@@ -120,6 +139,16 @@ export function CheckoutSummary({
         <h2 className="text-lg font-semibold">Choose your turnaround</h2>
 
         <div className="grid gap-3">
+          {FLAGS.QUICK_QUESTION_ENABLED && (
+            <TurnaroundOption
+              label="Quick Question"
+              price={PRICING.QUICK_QUESTION_PRICE_USD}
+              turnaroundCopy="One specific question answered"
+              selected={turnaround === "quick_question"}
+              disabled={isSaving}
+              onClick={() => handleTurnaroundChange("quick_question")}
+            />
+          )}
           <TurnaroundOption
             label="Standard"
             price={PRICING.STANDARD_PROMO_PRICE_USD}

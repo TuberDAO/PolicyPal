@@ -2,13 +2,18 @@
 
 import { useState } from "react";
 
+interface ActionChunk {
+  heading: string;
+  items: string[];
+}
+
 interface Example {
   id: string;
   title: string;
   preview: string;
   problem: string;
   plan: string;
-  steps: string[];
+  actions: ActionChunk[];
 }
 
 const EXAMPLES: Example[] = [
@@ -19,14 +24,32 @@ const EXAMPLES: Example[] = [
       "A claim was denied because the insurer said prior authorization wasn\u2019t obtained \u2014 even though the doctor\u2019s office submitted it.",
     problem:
       "A patient received an MRI referral from their primary care doctor for chronic knee pain. The insurer denied the claim, saying prior authorization wasn\u2019t obtained. The doctor\u2019s office says they submitted the request, but the insurer has no record of it. The patient received a bill for $2,100.",
-    plan: "File an internal appeal within the insurer\u2019s appeal window. The key is proving the prior auth request was submitted and attaching a medical necessity letter from the treating physician.",
-    steps: [
-      "Call the insurer\u2019s member services and request the specific denial reason code and appeal instructions in writing",
-      "Request the denial letter (called an Adverse Benefit Determination) if not already received",
-      "Contact the doctor\u2019s office and ask for proof that the prior authorization was submitted \u2014 fax confirmation, timestamp, or reference number",
-      "Ask the treating physician to write a brief letter explaining why the MRI was medically necessary",
-      "Compile everything into an appeal package and submit by certified mail before the appeal deadline",
-      "Follow up with the insurer 14 days after submission if no acknowledgment is received",
+    plan: "File an internal appeal within the insurer\u2019s appeal window. The key is proving the prior auth request was submitted and attaching a medical necessity letter from the treating physician. If the internal appeal is denied, escalate to the state insurance department and request an external review.",
+    actions: [
+      {
+        heading: "Gather evidence",
+        items: [
+          "Call Member Services and request the denial reason code and appeal deadline in writing",
+          "Contact your doctor\u2019s office \u2014 ask for the fax confirmation, timestamp, or reference number proving the prior auth was submitted",
+          "Ask the treating physician for a medical necessity letter supporting the MRI",
+        ],
+      },
+      {
+        heading: "File internal appeal",
+        items: [
+          "Submit the appeal package to the address on your denial letter by certified mail",
+          "Include: denial letter, proof of prior auth submission, medical necessity letter, and a brief cover letter",
+          "Record the name and title of anyone you speak with \u2014 e.g. Senior Appeals Specialist or Appeals Coordinator",
+        ],
+      },
+      {
+        heading: "Escalate if denied again",
+        items: [
+          "Request the contact information for the Medical Director, Utilization Management who reviewed your case",
+          "File a complaint with your state insurance department \u2014 look for the State Insurance Case Intake line",
+          "Request an Independent External Review through your insurer or state regulator",
+        ],
+      },
     ],
   },
   {
@@ -36,14 +59,32 @@ const EXAMPLES: Example[] = [
       "An emergency room visit at an in-network hospital resulted in a $3,200 bill from an out-of-network physician group.",
     problem:
       "A patient went to an in-network hospital emergency room for chest pain. Weeks later, they received a $3,200 bill from the ER physician group, which turned out to be out-of-network. Insurance paid their portion, but the physician group is billing the patient for the remaining balance.",
-    plan: "This situation is likely protected by the No Surprises Act. Emergency services at in-network facilities cannot be balance billed at out-of-network rates. The patient should not owe more than their in-network cost-sharing amount.",
-    steps: [
-      "Request an itemized bill from the physician group and the Explanation of Benefits from the insurer",
-      "Confirm that the hospital facility was in-network on the date of service",
-      "Contact the physician group\u2019s billing department and reference the No Surprises Act \u2014 they are prohibited from balance billing for emergency services",
-      "If the bill isn\u2019t adjusted within 30 days, file a complaint with the insurer",
-      "Use the federal Independent Dispute Resolution (IDR) process if the provider disputes the amount",
-      "Contact your state insurance department for additional support if needed",
+    plan: "This situation is likely protected by the No Surprises Act. Emergency services at in-network facilities cannot be balance billed at out-of-network rates. The patient should not owe more than their in-network cost-sharing amount. If the provider doesn\u2019t correct the bill, escalate to the insurer and the federal No Surprises Help Desk.",
+    actions: [
+      {
+        heading: "Gather documentation",
+        items: [
+          "Request an itemized bill from the physician group\u2019s billing department",
+          "Request the Explanation of Benefits (EOB) from your insurer for the same date of service",
+          "Confirm the hospital facility was in-network on the date of service",
+        ],
+      },
+      {
+        heading: "Dispute the balance bill",
+        items: [
+          "Call the physician group\u2019s billing department and reference the No Surprises Act \u2014 they are prohibited from balance billing for emergency services",
+          "Ask to speak with a Billing Supervisor or Revenue Cycle Manager if the first representative cannot resolve it",
+          "Record the name, title, and direct line of anyone you speak with",
+        ],
+      },
+      {
+        heading: "Escalate if unresolved",
+        items: [
+          "File a complaint with your insurer\u2019s Executive Escalations Team or Member Grievances department",
+          "Contact the federal No Surprises Help Desk (1-800-985-3059) to report the balance bill",
+          "If your employer provides the plan, notify your Benefits Manager \u2014 they may be able to intervene with the insurer directly",
+        ],
+      },
     ],
   },
 ];
@@ -165,7 +206,7 @@ function ExampleOverlay({
 
               <div>
                 <h3 className="text-sm font-semibold uppercase tracking-wide text-muted">
-                  The problem
+                  The situation
                 </h3>
                 <p className="mt-2 leading-relaxed text-foreground">
                   {example.problem}
@@ -186,27 +227,40 @@ function ExampleOverlay({
                 onClick={() => setScreen(1)}
                 className="mt-2 inline-block text-sm font-medium text-accent transition-colors hover:text-cta"
               >
-                See sample steps &rarr;
+                See sample action steps &rarr;
               </button>
             </div>
           ) : (
-            <div className="space-y-6">
+            <div className="space-y-8">
               <h2 className="text-2xl font-semibold tracking-tight">
                 Sample action steps
               </h2>
 
-              <ol className="space-y-4">
-                {example.steps.map((step, i) => (
-                  <li key={i} className="flex gap-3">
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-accent-light text-xs font-semibold text-accent">
-                      {i + 1}
-                    </span>
-                    <p className="text-sm leading-relaxed text-foreground">
-                      {step}
-                    </p>
-                  </li>
-                ))}
-              </ol>
+              {example.actions.map((chunk) => (
+                <div key={chunk.heading}>
+                  <h3 className="text-sm font-semibold uppercase tracking-wide text-accent">
+                    {chunk.heading}
+                  </h3>
+                  <ul className="mt-3 space-y-3">
+                    {chunk.items.map((item, i) => (
+                      <li key={i} className="flex gap-3">
+                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded border border-border text-[10px] text-muted">
+                          &#x2713;
+                        </span>
+                        <p className="text-sm leading-relaxed text-foreground">
+                          {item}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
+              <p className="rounded-lg bg-accent-light px-4 py-3 text-xs leading-relaxed text-muted">
+                We don&rsquo;t just tell you to call customer service. We help
+                direct the case toward the people who can actually influence
+                the outcome.
+              </p>
             </div>
           )}
         </div>

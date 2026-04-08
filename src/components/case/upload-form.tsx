@@ -13,6 +13,7 @@ interface StagedFile {
   file: File;
   status: FileStatus;
   error?: string;
+  persistedId?: string;
 }
 
 interface ExistingFile {
@@ -25,6 +26,7 @@ interface ExistingFile {
 interface UploadFormProps {
   caseId: string;
   existingFiles: ExistingFile[];
+  onDeleteFile?: (fileId: string) => Promise<{ error?: string }>;
 }
 
 const STORAGE_BUCKET = "case-files";
@@ -48,18 +50,22 @@ function inferMimeType(file: File): string {
   return map[ext ?? ""] ?? file.type;
 }
 
-export function UploadForm({ caseId, existingFiles }: UploadFormProps) {
+export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormProps) {
   const [stagedFiles, setStagedFiles] = useState<StagedFile[]>([]);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
+  const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
+  const [removingId, setRemovingId] = useState<string | null>(null);
   const batchId = useRef(crypto.randomUUID()).current;
   const cameraRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  const visibleExistingFiles = existingFiles.filter((f) => !removedIds.has(f.id));
 
   const isUploading = stagedFiles.some(
     (f) => f.status === "uploading" || f.status === "pending",
   );
   const uploadedCount =
-    existingFiles.length +
+    visibleExistingFiles.length +
     stagedFiles.filter((f) => f.status === "done").length;
 
   function addFiles(fileList: FileList | null) {
@@ -175,10 +181,26 @@ export function UploadForm({ caseId, existingFiles }: UploadFormProps) {
         return;
       }
 
-      setStatus("done");
+      setStagedFiles((prev) =>
+        prev.map((f) =>
+          f.localId === staged.localId
+            ? { ...f, status: "done", persistedId: result.id }
+            : f,
+        ),
+      );
     } catch {
       setStatus("error", "Something went wrong. Please try again.");
     }
+  }
+
+  async function handleDeleteExisting(fileId: string) {
+    if (!onDeleteFile || removingId) return;
+    setRemovingId(fileId);
+    const result = await onDeleteFile(fileId);
+    if (!result?.error) {
+      setRemovedIds((prev) => new Set([...prev, fileId]));
+    }
+    setRemovingId(null);
   }
 
   function retryUpload(localId: string) {
@@ -191,7 +213,7 @@ export function UploadForm({ caseId, existingFiles }: UploadFormProps) {
     setStagedFiles((prev) => prev.filter((f) => f.localId !== localId));
   }
 
-  const hasFiles = existingFiles.length > 0 || stagedFiles.length > 0;
+  const hasFiles = visibleExistingFiles.length > 0 || stagedFiles.length > 0;
 
   return (
     <div className="mx-auto w-full max-w-lg space-y-6">
@@ -261,7 +283,7 @@ export function UploadForm({ caseId, existingFiles }: UploadFormProps) {
       {/* File list */}
       {hasFiles && (
         <ul className="divide-y divide-border overflow-hidden rounded-lg border border-border">
-          {existingFiles.map((f) => (
+          {visibleExistingFiles.map((f) => (
             <li
               key={f.id}
               className="flex items-center gap-3 px-4 py-3 text-sm"
@@ -273,6 +295,17 @@ export function UploadForm({ caseId, existingFiles }: UploadFormProps) {
               <span className="shrink-0 text-xs text-muted">
                 {formatBytes(f.size_bytes)}
               </span>
+              {onDeleteFile && (
+                <button
+                  type="button"
+                  onClick={() => handleDeleteExisting(f.id)}
+                  disabled={removingId !== null}
+                  className="shrink-0 text-xs text-muted hover:text-error transition-colors disabled:opacity-40"
+                  aria-label={`Remove ${f.original_filename}`}
+                >
+                  {removingId === f.id ? "…" : "Remove"}
+                </button>
+              )}
             </li>
           ))}
           {stagedFiles.map((f) => (
@@ -292,6 +325,17 @@ export function UploadForm({ caseId, existingFiles }: UploadFormProps) {
               <span className="shrink-0 text-xs text-muted">
                 {formatBytes(f.file.size)}
               </span>
+              {f.status === "done" && f.persistedId && onDeleteFile && (
+                <button
+                  type="button"
+                  onClick={() => handleDeleteExisting(f.persistedId!)}
+                  disabled={removingId !== null}
+                  className="shrink-0 text-xs text-muted hover:text-error transition-colors disabled:opacity-40"
+                  aria-label={`Remove ${f.file.name}`}
+                >
+                  {removingId === f.persistedId ? "…" : "Remove"}
+                </button>
+              )}
               {f.status === "error" && (
                 <div className="flex shrink-0 gap-2">
                   <button

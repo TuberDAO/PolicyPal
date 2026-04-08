@@ -1,6 +1,8 @@
 import { redirect, notFound } from "next/navigation";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { deleteFile } from "@/actions/case";
 import { UploadForm } from "@/components/case/upload-form";
 
 export const metadata: Metadata = { title: "Upload Documents" };
@@ -31,5 +33,23 @@ export default async function UploadPage({
     .eq("case_id", id)
     .order("uploaded_at", { ascending: true });
 
-  return <UploadForm caseId={id} existingFiles={existingFiles ?? []} />;
+  const boundDeleteFile = deleteFile.bind(null, id);
+
+  return (
+    <>
+      <div className="mx-auto w-full max-w-lg">
+        <Link
+          href={`/case/${id}/edit`}
+          className="inline-block text-sm text-muted hover:text-foreground transition-colors"
+        >
+          ← Edit case details
+        </Link>
+      </div>
+      <UploadForm
+        caseId={id}
+        existingFiles={existingFiles ?? []}
+        onDeleteFile={boundDeleteFile}
+      />
+    </>
+  );
 }

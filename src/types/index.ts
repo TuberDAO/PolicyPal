@@ -24,7 +24,7 @@ export type CaseStatus =
   | "awaiting_info"
   | "complete";
 
-export type TurnaroundType = "standard" | "rush";
+export type TurnaroundType = "quick_question" | "standard" | "rush";
 
 /**
  * Shape of the intake draft stored in localStorage before sign-in.

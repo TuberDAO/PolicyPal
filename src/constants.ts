@@ -11,6 +11,7 @@ export const BRAND = {
 } as const;
 
 export const PRICING = {
+  QUICK_QUESTION_PRICE_USD: 19,
   STANDARD_PROMO_PRICE_USD: 67,
   STANDARD_REGULAR_PRICE_USD: 99,
   RUSH_PRICE_USD: 149,
@@ -38,6 +39,7 @@ export const UPLOAD_LIMITS = {
  */
 export const FLAGS = {
   RUSH_ENABLED: true,
+  QUICK_QUESTION_ENABLED: true,
 } as const;
 
 /**
@@ -47,6 +49,7 @@ export const FLAGS = {
  * env var to switch between promo and regular price IDs.
  */
 export const STRIPE = {
+  PRICE_ID_QUICK_QUESTION: process.env.STRIPE_PRICE_QUICK_QUESTION ?? "",
   PRICE_ID_STANDARD: process.env.STRIPE_PRICE_STANDARD ?? "",
   PRICE_ID_RUSH: process.env.STRIPE_PRICE_RUSH ?? "",
 } as const;

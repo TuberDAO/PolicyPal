@@ -375,7 +375,7 @@ export type Database = {
         | "employer_plan"
         | "collections"
         | "not_sure"
-      turnaround_type: "standard" | "rush"
+      turnaround_type: "quick_question" | "standard" | "rush"
       user_role: "customer" | "reviewer" | "admin"
     }
     CompositeTypes: {
@@ -523,7 +523,7 @@ export const Constants = {
         "collections",
         "not_sure",
       ],
-      turnaround_type: ["standard", "rush"],
+      turnaround_type: ["quick_question", "standard", "rush"],
       user_role: ["customer", "reviewer", "admin"],
     },
   },
