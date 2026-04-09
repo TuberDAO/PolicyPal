@@ -1,6 +1,7 @@
 import Link from "next/link";
+import type { User } from "@supabase/supabase-js";
 
-export function HeroSection() {
+export function HeroSection({ user }: { user: User | null }) {
   return (
     <section className="px-4 pb-12 pt-16 sm:px-6 sm:pb-16 sm:pt-24">
       <div className="mx-auto max-w-2xl text-center">
@@ -22,12 +23,29 @@ export function HeroSection() {
           A real person handles the case from start to finish.
         </p>
 
-        <Link
-          href="/start"
-          className="mt-8 inline-block rounded-lg bg-cta px-8 py-3.5 text-base font-medium text-white transition-colors hover:bg-cta-hover"
-        >
-          Start your review
-        </Link>
+        {user ? (
+          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Link
+              href="/case/new"
+              className="inline-block rounded-lg bg-cta px-8 py-3.5 text-base font-medium text-white transition-colors hover:bg-cta-hover"
+            >
+              Start a new case
+            </Link>
+            <Link
+              href="/dashboard"
+              className="inline-block rounded-lg border border-border px-8 py-3.5 text-base font-medium text-foreground transition-colors hover:bg-surface-raised"
+            >
+              View current cases
+            </Link>
+          </div>
+        ) : (
+          <Link
+            href="/start"
+            className="mt-8 inline-block rounded-lg bg-cta px-8 py-3.5 text-base font-medium text-white transition-colors hover:bg-cta-hover"
+          >
+            Start your review
+          </Link>
+        )}
       </div>
     </section>
   );

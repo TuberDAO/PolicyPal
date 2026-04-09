@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { getUploadUrl, confirmUpload } from "@/actions/upload";
@@ -58,6 +58,9 @@ export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormPr
   const batchId = useRef(crypto.randomUUID()).current;
   const cameraRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const [showCamera, setShowCamera] = useState(false);
 
   const visibleExistingFiles = existingFiles.filter((f) => !removedIds.has(f.id));
 
@@ -124,6 +127,84 @@ export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormPr
     if (cameraRef.current) cameraRef.current.value = "";
     if (fileRef.current) fileRef.current.value = "";
   }
+
+  async function openCamera() {
+    setValidationErrors([]);
+    if (!navigator.mediaDevices?.getUserMedia) {
+      setValidationErrors([
+        "Camera access is not available in this browser. Please use \u201cUpload PDF / file\u201d instead.",
+      ]);
+      return;
+    }
+    try {
+      let stream: MediaStream;
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: { ideal: "environment" } },
+        });
+      } catch {
+        stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      }
+      streamRef.current = stream;
+      setShowCamera(true);
+    } catch (err) {
+      const name = err instanceof DOMException ? err.name : "";
+      if (name === "NotFoundError" || name === "DevicesNotFoundError") {
+        setValidationErrors([
+          "No camera was found on this device. Please use \u201cUpload PDF / file\u201d to select a file.",
+        ]);
+      } else if (name === "NotAllowedError" || name === "PermissionDeniedError") {
+        setValidationErrors([
+          "Camera permission was denied. Please allow camera access in your browser settings, then try again.",
+        ]);
+      } else {
+        setValidationErrors([
+          "Unable to access the camera. Please check that no other app is using it, then try again.",
+        ]);
+      }
+    }
+  }
+
+  function closeCamera() {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((t) => t.stop());
+      streamRef.current = null;
+    }
+    setShowCamera(false);
+  }
+
+  function capturePhoto() {
+    const video = videoRef.current;
+    if (!video) return;
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    ctx.drawImage(video, 0, 0);
+    canvas.toBlob(
+      (blob) => {
+        if (!blob) return;
+        const file = new File([blob], `photo-${Date.now()}.jpg`, {
+          type: "image/jpeg",
+        });
+        const dt = new DataTransfer();
+        dt.items.add(file);
+        addFiles(dt.files);
+        closeCamera();
+      },
+      "image/jpeg",
+      0.92,
+    );
+  }
+
+  useEffect(() => {
+    return () => {
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((t) => t.stop());
+      }
+    };
+  }, []);
 
   async function processUpload(staged: StagedFile) {
     const setStatus = (status: FileStatus, error?: string) => {
@@ -237,14 +318,14 @@ export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormPr
         <input
           ref={cameraRef}
           type="file"
-          accept="image/jpeg,image/png,image/heic"
+          accept="image/*"
           capture="environment"
           className="hidden"
           onChange={(e) => addFiles(e.target.files)}
         />
         <button
           type="button"
-          onClick={() => cameraRef.current?.click()}
+          onClick={openCamera}
           disabled={isUploading}
           className="flex flex-col items-center gap-2 rounded-lg border border-border bg-surface px-4 py-5 text-sm font-medium text-foreground transition hover:border-accent hover:bg-accent-light disabled:pointer-events-none disabled:opacity-50"
         >
@@ -386,6 +467,42 @@ export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormPr
               : "Continue without uploads"}
         </Link>
       </div>
+
+      {showCamera && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 p-4">
+          <div className="relative w-full max-w-lg">
+            <video
+              ref={(el) => {
+                videoRef.current = el;
+                if (el && streamRef.current) {
+                  el.srcObject = streamRef.current;
+                }
+              }}
+              autoPlay
+              playsInline
+              muted
+              className="w-full rounded-lg"
+            />
+            <div className="mt-6 flex items-center justify-center gap-6">
+              <button
+                type="button"
+                onClick={closeCamera}
+                className="rounded-lg px-6 py-3 text-sm font-semibold text-white/80 transition hover:text-white"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={capturePhoto}
+                className="flex h-16 w-16 items-center justify-center rounded-full border-4 border-white/40 bg-white transition hover:bg-white/80"
+                aria-label="Take photo"
+              >
+                <CameraIcon className="h-6 w-6 text-black/70" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

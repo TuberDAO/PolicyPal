@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useMemo } from "react";
 import Link from "next/link";
-import { ISSUE_TYPE_LABELS, PRICING, TURNAROUND, FLAGS } from "@/constants";
+import { ISSUE_TYPE_LABELS, PRICING, TURNAROUND, FLAGS, formatExpectedBy } from "@/constants";
 import { updateTurnaround, createCheckoutSession } from "@/actions/checkout";
 import type { TurnaroundType, IssueType } from "@/types";
 
@@ -27,6 +27,9 @@ export function CheckoutSummary({
 }: CheckoutSummaryProps) {
   const [turnaround, setTurnaround] =
     useState<TurnaroundType>(initialTurnaround);
+
+  const standardLabel = useMemo(() => formatExpectedBy(TURNAROUND.STANDARD_DAYS), []);
+  const rushLabel = useMemo(() => formatExpectedBy(TURNAROUND.RUSH_DAYS), []);
   const [isSaving, startSaving] = useTransition();
   const [saveError, setSaveError] = useState("");
   const [isSubmitting, startSubmitting] = useTransition();
@@ -153,7 +156,7 @@ export function CheckoutSummary({
             label="Standard"
             price={PRICING.STANDARD_PROMO_PRICE_USD}
             regularPrice={PRICING.STANDARD_REGULAR_PRICE_USD}
-            turnaroundCopy={TURNAROUND.STANDARD_LABEL}
+            turnaroundCopy={standardLabel}
             selected={turnaround === "standard"}
             disabled={isSaving}
             onClick={() => handleTurnaroundChange("standard")}
@@ -162,7 +165,7 @@ export function CheckoutSummary({
             <TurnaroundOption
               label="Rush"
               price={PRICING.RUSH_PRICE_USD}
-              turnaroundCopy={TURNAROUND.RUSH_LABEL}
+              turnaroundCopy={rushLabel}
               selected={turnaround === "rush"}
               disabled={isSaving}
               onClick={() => handleTurnaroundChange("rush")}

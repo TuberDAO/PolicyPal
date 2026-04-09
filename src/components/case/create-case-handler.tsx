@@ -6,6 +6,17 @@ import { useIntakeDraft } from "@/hooks/use-draft";
 import { intakeDraftSchema } from "@/utils/validation";
 import { createCase } from "@/actions/case";
 
+function readStorage(store: Storage, key: string): object | null {
+  try {
+    const raw = store.getItem(key);
+    if (!raw) return null;
+    const parsed: unknown = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : null;
+  } catch {
+    return null;
+  }
+}
+
 type Status = "creating" | "error" | "redirecting";
 
 export function CreateCaseHandler() {
@@ -34,7 +45,22 @@ export function CreateCaseHandler() {
     const { savedAt: _savedAt, ...input } = result.data;
     void _savedAt;
 
-    createCase(input).then((res) => {
+    let attribution: {
+      first_touch: ReturnType<typeof readStorage> | null;
+      session_touch: ReturnType<typeof readStorage> | null;
+    } | null = null;
+
+    try {
+      const first = readStorage(localStorage, "pp_first_touch");
+      const session = readStorage(sessionStorage, "pp_session_touch");
+      if (first !== null || session !== null) {
+        attribution = { first_touch: first, session_touch: session };
+      }
+    } catch {
+      // Storage unavailable — proceed without attribution.
+    }
+
+    createCase({ ...input, attribution }).then((res) => {
       if (res.error) {
         setStatus("error");
         setErrorMessage(res.error);

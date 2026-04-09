@@ -20,7 +20,36 @@ export const PRICING = {
 export const TURNAROUND = {
   STANDARD_LABEL: "Delivered within 3 business days, often faster",
   RUSH_LABEL: "Delivered within 1 business day",
+  STANDARD_DAYS: 3,
+  RUSH_DAYS: 1,
 } as const;
+
+/** Advances a date by N weekdays (Mon–Fri), skipping Sat/Sun only. */
+function addBusinessDays(from: Date, days: number): Date {
+  const d = new Date(from);
+  let added = 0;
+  while (added < days) {
+    d.setDate(d.getDate() + 1);
+    const dow = d.getDay();
+    if (dow !== 0 && dow !== 6) added++;
+  }
+  return d;
+}
+
+/**
+ * Returns a human-readable expected-by string based on business days from now.
+ * Weekends are skipped; no holiday dataset is used — the copy notes this instead.
+ * Example: "By Mon, Apr 14 at the latest — often sooner. Public holidays may add a day."
+ */
+export function formatExpectedBy(businessDays: number): string {
+  const target = addBusinessDays(new Date(), businessDays);
+  const formatted = target.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+  return `By ${formatted} at the latest — often sooner. Public holidays may add a day.`;
+}
 
 export const UPLOAD_LIMITS = {
   MAX_FILES_PER_BATCH: 10,

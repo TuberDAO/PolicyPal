@@ -8,7 +8,29 @@ import { intakeDraftSchema, ISSUE_TYPES, US_STATE_CODES } from "@/utils/validati
 
 const STORAGE_BUCKET = "case-files";
 
-const createCaseInput = intakeDraftSchema.omit({ savedAt: true });
+const touchSchema = z
+  .object({
+    utm_source: z.string().max(200).nullable(),
+    utm_medium: z.string().max(200).nullable(),
+    utm_campaign: z.string().max(200).nullable(),
+    utm_content: z.string().max(200).nullable(),
+    utm_term: z.string().max(200).nullable(),
+    referrer: z.string().max(500).nullable(),
+    captured_at: z.string().max(50),
+  })
+  .nullable();
+
+const attributionSchema = z
+  .object({
+    first_touch: touchSchema,
+    session_touch: touchSchema,
+  })
+  .nullable()
+  .optional();
+
+const createCaseInput = intakeDraftSchema
+  .omit({ savedAt: true })
+  .extend({ attribution: attributionSchema });
 
 type CreateCaseResult =
   | { id: string; error?: never }
@@ -31,7 +53,8 @@ export async function createCase(
     return { error: "You must be signed in to create a case." };
   }
 
-  const { issueTypes, state, description, ...optionalFields } = parsed.data;
+  const { issueTypes, state, description, attribution, ...optionalFields } =
+    parsed.data;
 
   const { data, error } = await supabase
     .from("cases")
@@ -45,6 +68,7 @@ export async function createCase(
       urgency: optionalFields.urgency ?? null,
       desired_outcome: optionalFields.desiredOutcome ?? null,
       already_tried: optionalFields.alreadyTried ?? null,
+      attribution: attribution ?? null,
     })
     .select("id")
     .single();

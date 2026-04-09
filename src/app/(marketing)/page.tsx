@@ -5,11 +5,17 @@ import { HowItWorksSection } from "@/components/marketing/how-it-works-section";
 import { WhatYouGetSection } from "@/components/marketing/what-you-get-section";
 import { PricingSection } from "@/components/marketing/pricing-section";
 import { TrustedSourcesSection } from "@/components/marketing/trusted-sources-section";
+import { createClient } from "@/lib/supabase/server";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <>
-      <HeroSection />
+      <HeroSection user={user} />
       <ExamplesSection />
       <HowItWorksSection />
       <WhatYouGetSection />
@@ -21,12 +27,29 @@ export default function HomePage() {
         <p className="mx-auto max-w-md text-lg text-muted">
           Ready to get started?
         </p>
-        <Link
-          href="/start"
-          className="mt-6 inline-block rounded-lg bg-cta px-8 py-3.5 text-base font-medium text-white transition-colors hover:bg-cta-hover"
-        >
-          Start your review
-        </Link>
+        {user ? (
+          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Link
+              href="/case/new"
+              className="inline-block rounded-lg bg-cta px-8 py-3.5 text-base font-medium text-white transition-colors hover:bg-cta-hover"
+            >
+              Start a new case
+            </Link>
+            <Link
+              href="/dashboard"
+              className="inline-block rounded-lg border border-border px-8 py-3.5 text-base font-medium text-foreground transition-colors hover:bg-surface-raised"
+            >
+              View current cases
+            </Link>
+          </div>
+        ) : (
+          <Link
+            href="/start"
+            className="mt-6 inline-block rounded-lg bg-cta px-8 py-3.5 text-base font-medium text-white transition-colors hover:bg-cta-hover"
+          >
+            Start your review
+          </Link>
+        )}
       </section>
     </>
   );

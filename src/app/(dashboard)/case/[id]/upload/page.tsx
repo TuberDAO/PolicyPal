@@ -15,10 +15,17 @@ export default async function UploadPage({
   const { id } = await params;
   const supabase = await createClient();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) redirect("/login");
+
   const { data: caseRow } = await supabase
     .from("cases")
     .select("id, status")
     .eq("id", id)
+    .eq("customer_id", user.id)
     .single();
 
   if (!caseRow) notFound();
