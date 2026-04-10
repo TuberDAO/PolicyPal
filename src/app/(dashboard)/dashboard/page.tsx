@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
-import { CASE_STATUS_LABELS, ISSUE_TYPE_LABELS } from "@/constants";
+import {
+  CASE_STATUS_LABELS,
+  ISSUE_TYPE_LABELS,
+  TURNAROUND,
+  formatExpectedBy,
+} from "@/constants";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
@@ -45,18 +50,26 @@ export default async function DashboardPage({
     status: string;
     issue_types: string[];
     submitted_at: string | null;
+    turnaround: string | null;
   } | null = null;
 
   if (paid && user) {
     const { data } = await supabase
       .from("cases")
-      .select("id, status, issue_types, submitted_at")
+      .select("id, status, issue_types, submitted_at, turnaround")
       .eq("customer_id", user.id)
       .eq("stripe_checkout_session_id", paid)
       .eq("status", "draft")
       .maybeSingle();
     pendingCase = data ?? null;
   }
+
+  const turnaroundExpectedBy =
+    pendingCase?.turnaround === "rush"
+      ? formatExpectedBy(TURNAROUND.RUSH_DAYS)
+      : pendingCase?.turnaround === "standard"
+        ? formatExpectedBy(TURNAROUND.STANDARD_DAYS)
+        : null;
 
   // Merge: pending case at top, then submitted cases. Overlap is impossible
   // since the pending query requires draft status, but the id filter is a
@@ -80,6 +93,21 @@ export default async function DashboardPage({
           Start a new case
         </Link>
       </div>
+
+      {paid && (
+        <div className="rounded-lg border border-border bg-surface px-4 py-3 text-sm">
+          <p className="font-medium text-foreground">
+            Payment confirmed — your case has been submitted.
+          </p>
+          {turnaroundExpectedBy ? (
+            <p className="mt-1 text-muted">{turnaroundExpectedBy}</p>
+          ) : (
+            <p className="mt-1 text-muted">
+              We will review your case and be in touch shortly.
+            </p>
+          )}
+        </div>
+      )}
 
       {!hasAnything ? (
         <p className="text-sm text-muted">

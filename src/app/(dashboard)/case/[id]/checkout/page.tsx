@@ -13,11 +13,18 @@ export default async function CheckoutPage({
   const { id } = await params;
   const supabase = await createClient();
 
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) redirect("/login");
+
   const { data: caseRow } = await supabase
     .from("cases")
     .select("id, status, issue_types, state, description, turnaround")
     .eq("id", id)
-    .single();
+    .eq("customer_id", user.id)
+    .maybeSingle();
 
   if (!caseRow) notFound();
 

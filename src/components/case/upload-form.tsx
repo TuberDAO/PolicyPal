@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { getUploadUrl, confirmUpload } from "@/actions/upload";
 import { UPLOAD_LIMITS } from "@/constants";
@@ -51,6 +51,7 @@ function inferMimeType(file: File): string {
 }
 
 export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormProps) {
+  const router = useRouter();
   const [stagedFiles, setStagedFiles] = useState<StagedFile[]>([]);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
@@ -451,21 +452,18 @@ export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormPr
 
       {/* Continue */}
       <div className="pt-2">
-        <Link
-          href={`/case/${caseId}/checkout`}
-          aria-disabled={isUploading}
-          className={`block w-full rounded-lg px-6 py-3 text-center text-sm font-semibold transition ${
-            isUploading
-              ? "pointer-events-none bg-border text-muted"
-              : "bg-cta text-white hover:bg-cta-hover"
-          }`}
+        <button
+          type="button"
+          onClick={() => router.push(`/case/${caseId}/checkout`)}
+          disabled={isUploading}
+          className="block w-full rounded-lg px-6 py-3 text-center text-sm font-semibold transition bg-cta text-white hover:bg-cta-hover disabled:pointer-events-none disabled:bg-border disabled:text-muted"
         >
           {isUploading
             ? "Uploading\u2026"
             : uploadedCount > 0
               ? "Continue to review"
               : "Continue without uploads"}
-        </Link>
+        </button>
       </div>
 
       {showCamera && (

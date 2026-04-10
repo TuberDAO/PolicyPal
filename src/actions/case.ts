@@ -63,6 +63,7 @@ export async function createCase(
       issue_types: issueTypes,
       state,
       description,
+      turnaround: "standard",
       insurer_name: optionalFields.insurerName ?? null,
       provider_name: optionalFields.providerName ?? null,
       urgency: optionalFields.urgency ?? null,

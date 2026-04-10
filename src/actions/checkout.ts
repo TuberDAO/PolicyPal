@@ -42,7 +42,8 @@ export async function updateTurnaround(
     .from("cases")
     .select("id, status")
     .eq("id", parsed.data.caseId)
-    .single();
+    .eq("customer_id", user.id)
+    .maybeSingle();
 
   if (!caseRow) {
     return { error: "Case not found." };
@@ -55,7 +56,8 @@ export async function updateTurnaround(
   const { error } = await supabase
     .from("cases")
     .update({ turnaround: parsed.data.turnaround })
-    .eq("id", parsed.data.caseId);
+    .eq("id", parsed.data.caseId)
+    .eq("customer_id", user.id);
 
   if (error) {
     return { error: "Failed to update turnaround. Please try again." };

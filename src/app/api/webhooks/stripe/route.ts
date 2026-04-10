@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
 
     const { data: caseRow } = await supabase
       .from("cases")
-      .select("id, status")
+      .select("id, status, stripe_checkout_session_id")
       .eq("id", caseId)
       .single();
 
@@ -52,6 +52,13 @@ export async function POST(request: NextRequest) {
 
     // Idempotent: if already beyond draft, treat as already processed
     if (caseRow.status !== "draft") {
+      return NextResponse.json({ received: true });
+    }
+
+    // Only the session recorded on the case may transition it. Stale or
+    // abandoned sessions (superseded by a newer createCheckoutSession call)
+    // are acknowledged without modifying the case.
+    if (caseRow.stripe_checkout_session_id !== session.id) {
       return NextResponse.json({ received: true });
     }
 
@@ -72,6 +79,7 @@ export async function POST(request: NextRequest) {
       })
       .eq("id", caseId)
       .eq("status", "draft") // belt-and-suspenders against concurrent replays
+      .eq("stripe_checkout_session_id", session.id) // only the matching session
       .select("id");
 
     if (updateError) {
