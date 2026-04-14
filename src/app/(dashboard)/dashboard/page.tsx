@@ -97,7 +97,7 @@ export default async function DashboardPage({
       {paid && (
         <div className="rounded-lg border border-border bg-surface px-4 py-3 text-sm">
           <p className="font-medium text-foreground">
-            Payment confirmed — your case has been submitted.
+            Payment confirmed. Your case has been submitted.
           </p>
           {turnaroundExpectedBy ? (
             <p className="mt-1 text-muted">{turnaroundExpectedBy}</p>
@@ -203,12 +203,16 @@ export default async function DashboardPage({
                                       year: "numeric",
                                     },
                                   )
-                                : "—"}
+                                : "N/A"}
                             </p>
                           </div>
                           {isPending ? (
                             <span className="shrink-0 rounded-full border border-border bg-surface px-2.5 py-0.5 text-xs font-medium text-muted">
-                              Payment received — processing
+                              Payment complete. Sent for review.
+                            </span>
+                          ) : c.status === "awaiting_info" ? (
+                            <span className="shrink-0 rounded-full bg-orange-50 border border-orange-300 px-2.5 py-0.5 text-xs font-medium text-orange-700">
+                              Action needed
                             </span>
                           ) : (
                             <span className="shrink-0 rounded-full bg-accent-light px-2.5 py-0.5 text-xs font-medium text-accent">

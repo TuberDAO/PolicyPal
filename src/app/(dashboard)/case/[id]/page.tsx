@@ -3,6 +3,10 @@ import type React from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { CASE_STATUS_LABELS, ISSUE_TYPE_LABELS } from "@/constants";
+import { getCustomerThread } from "@/actions/customer";
+import { getPublishedPlaybook } from "@/actions/playbook";
+import { CustomerThread } from "@/components/case/customer-thread";
+import { PlaybookView } from "@/components/case/playbook-view";
 
 export const metadata: Metadata = { title: "Case Detail" };
 
@@ -76,6 +80,13 @@ export default async function CaseDetailPage({
     );
   }
 
+  const isSubmitted = c.status !== "draft";
+  const canReply = ["submitted", "under_review", "awaiting_info", "complete"].includes(c.status);
+  const [thread, playbook] = await Promise.all([
+    isSubmitted ? getCustomerThread(c.id) : Promise.resolve([]),
+    c.status === "complete" ? getPublishedPlaybook(c.id) : Promise.resolve(null),
+  ]);
+
   return (
     <div className="mx-auto w-full max-w-2xl space-y-6">
       <div className="flex items-center justify-between gap-4">
@@ -90,6 +101,14 @@ export default async function CaseDetailPage({
           </span>
         )}
       </div>
+
+      {c.status === "awaiting_info" && (
+        <div className="rounded-lg border border-orange-300 bg-orange-50 px-4 py-3">
+          <p className="text-sm font-medium text-orange-800">
+            Action needed: we need a bit more information before we can finish your case.
+          </p>
+        </div>
+      )}
 
       {c.status === "draft" && (
         <div className="rounded-lg border border-border bg-surface p-4 space-y-3">
@@ -132,6 +151,24 @@ export default async function CaseDetailPage({
           </p>
         </div>
       </div>
+
+      {playbook && (
+        <div className="rounded-lg border border-green-200 bg-green-50/30 p-5 sm:p-6 space-y-2">
+          <h2 className="font-heading text-xl font-semibold tracking-tight text-foreground">
+            Your Plan
+          </h2>
+          <PlaybookView caseId={c.id} content={playbook.content} />
+        </div>
+      )}
+
+      {isSubmitted && (
+        <div className="space-y-3 rounded-lg border border-border bg-surface p-5">
+          <h2 className="text-sm font-medium uppercase tracking-wide text-muted">
+            Updates
+          </h2>
+          <CustomerThread caseId={c.id} messages={thread} canReply={canReply} />
+        </div>
+      )}
 
       <Link href="/dashboard" className="text-sm text-accent hover:underline">
         ← Back to dashboard

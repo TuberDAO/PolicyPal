@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { BRAND } from "@/constants";
 
 /**
  * Admin layout — wraps all admin/reviewer pages.
@@ -32,7 +34,6 @@ export default async function AdminLayout({
     .eq("id", user.id)
     .single();
 
-  // Cast needed: placeholder Database types resolve to `never` until generated.
   const profile = data as { role: string } | null;
   const isStaff = profile?.role === "admin" || profile?.role === "reviewer";
 
@@ -40,9 +41,49 @@ export default async function AdminLayout({
     notFound();
   }
 
+  async function logout() {
+    "use server";
+    const supabase = await createClient();
+    await supabase.auth.signOut();
+    redirect("/");
+  }
+
   return (
     <>
-      {/* Future: <AdminNav /> with notification bell */}
+      <header className="border-b border-border bg-surface px-6 py-3">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <Link
+              href="/admin"
+              className="font-heading text-base font-semibold tracking-tight"
+            >
+              {BRAND.name}
+            </Link>
+            <span className="rounded bg-accent-light px-2 py-0.5 text-xs font-medium text-accent">
+              Admin
+            </span>
+          </div>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/admin"
+              className="text-sm text-muted hover:text-foreground transition-colors"
+            >
+              Case Queue
+            </Link>
+            <span className="hidden text-sm text-muted sm:inline">
+              {user.email}
+            </span>
+            <form action={logout}>
+              <button
+                type="submit"
+                className="text-sm font-medium text-accent hover:underline"
+              >
+                Log out
+              </button>
+            </form>
+          </div>
+        </div>
+      </header>
       <main className="flex flex-1 flex-col px-6 py-8">{children}</main>
     </>
   );

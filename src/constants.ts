@@ -48,7 +48,7 @@ export function formatExpectedBy(businessDays: number): string {
     month: "short",
     day: "numeric",
   });
-  return `By ${formatted} at the latest — often sooner. Public holidays may add a day.`;
+  return `By ${formatted} at the latest, often sooner. Public holidays may add a day.`;
 }
 
 export const UPLOAD_LIMITS = {

@@ -104,7 +104,7 @@ export async function updateCase(
 ): Promise<UpdateCaseResult> {
   const parsed = updateCaseInput.safeParse(input);
   if (!parsed.success) {
-    return { error: parsed.error.errors[0]?.message ?? "Invalid case data." };
+    return { error: parsed.error.issues[0]?.message ?? "Invalid case data." };
   }
 
   const supabase = await createClient();

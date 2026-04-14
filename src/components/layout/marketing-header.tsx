@@ -10,33 +10,36 @@ export function MarketingHeader({
   logoutAction?: () => Promise<void>;
 }) {
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-surface/80 backdrop-blur-sm">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+    <header className="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur-sm">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+        {/* Text wordmark only — no icon or SVG mark */}
         <Link
           href="/"
-          className="shrink-0 font-heading text-base font-semibold tracking-tight sm:text-lg"
+          className="shrink-0 font-heading text-lg font-semibold tracking-tight text-foreground"
         >
           {BRAND.name}
         </Link>
 
-        <div className="flex items-center gap-3 sm:gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
           <a
             href="#examples"
-            className="text-xs text-muted transition-colors hover:text-foreground sm:text-sm"
+            className="hidden text-sm text-muted transition-colors hover:text-foreground sm:inline"
           >
             Examples
           </a>
           <a
             href="#pricing"
-            className="text-xs text-muted transition-colors hover:text-foreground sm:text-sm"
+            className="hidden text-sm text-muted transition-colors hover:text-foreground sm:inline"
           >
             Pricing
           </a>
+
           {user ? (
+            /* Logged-in state: Dashboard button + Log out link (exactly one of each) */
             <>
               <Link
                 href="/dashboard"
-                className="whitespace-nowrap rounded-lg bg-cta px-2.5 py-1.5 text-xs font-medium text-white transition-colors hover:bg-cta-hover sm:px-4 sm:py-2 sm:text-sm"
+                className="rounded-lg bg-cta px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-cta-hover sm:px-4 sm:py-2"
               >
                 Dashboard
               </Link>
@@ -44,7 +47,7 @@ export function MarketingHeader({
                 <form action={logoutAction}>
                   <button
                     type="submit"
-                    className="text-xs text-muted transition-colors hover:text-foreground sm:text-sm"
+                    className="text-sm text-muted transition-colors hover:text-foreground"
                   >
                     Log out
                   </button>
@@ -52,16 +55,17 @@ export function MarketingHeader({
               )}
             </>
           ) : (
+            /* Logged-out state: Sign in link + Start review button */
             <>
               <Link
                 href="/login"
-                className="text-xs text-muted transition-colors hover:text-foreground sm:text-sm"
+                className="text-sm text-muted transition-colors hover:text-foreground"
               >
                 Sign in
               </Link>
               <Link
                 href="/start"
-                className="whitespace-nowrap rounded-lg bg-cta px-2.5 py-1.5 text-xs font-medium text-white transition-colors hover:bg-cta-hover sm:px-4 sm:py-2 sm:text-sm"
+                className="rounded-lg bg-cta px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-cta-hover sm:px-4 sm:py-2"
               >
                 Start review
               </Link>

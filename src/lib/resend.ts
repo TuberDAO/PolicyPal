@@ -1,12 +1,12 @@
-/**
- * Resend email client — for transactional emails.
- * Used by actions/email.ts to send payment confirmation, playbook ready, etc.
- * Implementation will be added in the email phase.
- */
+import { Resend } from "resend";
+import { getServerEnv } from "@/env";
 
-// import { Resend } from "resend";
-// import { getServerEnv } from "@/env";
+let cached: Resend | null = null;
 
-export function getResend() {
-  throw new Error("Resend client not yet configured");
+export function getResend(): Resend {
+  if (!cached) {
+    const { RESEND_API_KEY } = getServerEnv();
+    cached = new Resend(RESEND_API_KEY);
+  }
+  return cached;
 }

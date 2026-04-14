@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { HeroSection } from "@/components/marketing/hero-section";
+import { OutcomesSection } from "@/components/marketing/outcomes-section";
 import { ExamplesSection } from "@/components/marketing/examples-section";
 import { HowItWorksSection } from "@/components/marketing/how-it-works-section";
 import { WhatYouGetSection } from "@/components/marketing/what-you-get-section";
@@ -16,11 +17,13 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection user={user} />
+      <OutcomesSection />
+      {/* Scrolling source strip — sits flush beneath the hero */}
+      <TrustedSourcesSection />
       <ExamplesSection />
       <HowItWorksSection />
       <WhatYouGetSection />
       <PricingSection />
-      <TrustedSourcesSection />
 
       {/* Bottom CTA */}
       <section className="px-4 py-16 text-center sm:px-6 sm:py-20">
