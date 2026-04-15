@@ -6,6 +6,7 @@ import { HowItWorksSection } from "@/components/marketing/how-it-works-section";
 import { WhatYouGetSection } from "@/components/marketing/what-you-get-section";
 import { PricingSection } from "@/components/marketing/pricing-section";
 import { TrustedSourcesSection } from "@/components/marketing/trusted-sources-section";
+import { FaqSection } from "@/components/marketing/faq-section";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function HomePage() {
@@ -54,6 +55,8 @@ export default async function HomePage() {
           </Link>
         )}
       </section>
+
+      <FaqSection />
     </>
   );
 }
