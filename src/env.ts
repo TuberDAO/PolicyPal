@@ -22,7 +22,9 @@ const serverSchema = z.object({
   STRIPE_PRICE_RUSH: z.string().min(1, "Missing STRIPE_PRICE_RUSH"),
   RESEND_API_KEY: z.string().min(1, "Missing RESEND_API_KEY"),
   RESEND_FROM_EMAIL: z.string().min(1, "Missing RESEND_FROM_EMAIL"),
-  SENTRY_DSN: z.string().min(1, "Missing SENTRY_DSN"),
+  // Optional until Sentry config files (sentry.*.config.ts + withSentryConfig)
+  // are added. Keeping the key here so wiring it later requires no schema change.
+  SENTRY_DSN: z.string().optional(),
 });
 
 const clientSchema = z.object({

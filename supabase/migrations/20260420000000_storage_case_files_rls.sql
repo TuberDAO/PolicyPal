@@ -61,13 +61,6 @@ BEGIN
 END;
 $$;
 
--- =============================================================================
--- ENABLE RLS on storage.objects
--- =============================================================================
--- Supabase already enables RLS on storage.objects by default. This statement
--- is a no-op in that case but keeps the migration self-contained.
-
-ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
 
 -- =============================================================================
 -- POLICIES — case-files bucket

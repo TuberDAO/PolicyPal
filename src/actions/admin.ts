@@ -473,8 +473,14 @@ export async function sendCustomerUpdate(
   if (authUser?.user?.email) {
     try {
       await sendCaseUpdatedEmail(authUser.user.email);
-    } catch {
-      // Email failure should not block the update
+    } catch (err) {
+      console.error("[email] Failed to send case_updated for case", parsed.data.caseId, err);
+      await admin.from("case_updates").insert({
+        case_id: parsed.data.caseId,
+        author_id: userId,
+        content: "Email notification (case update) failed to send. Staff should follow up manually.",
+        is_internal: true,
+      });
     }
   }
 
@@ -536,8 +542,14 @@ export async function requestMoreInfo(
   if (authUser?.user?.email) {
     try {
       await sendNeedMoreInfoEmail(authUser.user.email);
-    } catch {
-      // Email failure should not block the update
+    } catch (err) {
+      console.error("[email] Failed to send need_more_info for case", parsed.data.caseId, err);
+      await admin.from("case_updates").insert({
+        case_id: parsed.data.caseId,
+        author_id: userId,
+        content: "Email notification (more info request) failed to send. Staff should follow up manually.",
+        is_internal: true,
+      });
     }
   }
 

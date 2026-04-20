@@ -151,43 +151,21 @@ export async function publishPlaybook(
 
   const now = new Date().toISOString();
 
-  const { data: existing } = await admin
-    .from("playbooks")
-    .select("id")
-    .eq("case_id", parsed.data.caseId)
-    .maybeSingle();
+  // Perform the playbook upsert and case status transition atomically via a
+  // SECURITY DEFINER RPC. Without this, a failure between the two writes
+  // would leave the playbook visible to the customer (sent_at set) while the
+  // case status remained incorrect. The RPC rolls both back on any error.
+  const { error: rpcError } = await admin.rpc("publish_playbook_atomic", {
+    p_case_id: parsed.data.caseId,
+    p_author_id: userId,
+    p_content: parsed.data.content,
+    p_now: now,
+  });
 
-  if (existing) {
-    const { error } = await admin
-      .from("playbooks")
-      .update({
-        content: parsed.data.content,
-        author_id: userId,
-        sent_at: now,
-        updated_at: now,
-      })
-      .eq("id", existing.id);
-    if (error) return { error: "Failed to publish playbook." };
-  } else {
-    const { error } = await admin.from("playbooks").insert({
-      case_id: parsed.data.caseId,
-      author_id: userId,
-      content: parsed.data.content,
-      sent_at: now,
-    });
-    if (error) return { error: "Failed to publish playbook." };
+  if (rpcError) {
+    console.error("[playbook] publish_playbook_atomic failed for case", parsed.data.caseId, rpcError);
+    return { error: "Failed to publish playbook." };
   }
-
-  const { error: statusError } = await admin
-    .from("cases")
-    .update({
-      status: "complete",
-      completed_at: now,
-      updated_at: now,
-    })
-    .eq("id", parsed.data.caseId);
-
-  if (statusError) return { error: "Playbook saved but status update failed." };
 
   await admin.from("case_updates").insert({
     case_id: parsed.data.caseId,
@@ -202,8 +180,14 @@ export async function publishPlaybook(
   if (authUser?.user?.email) {
     try {
       await sendCaseReadyEmail(authUser.user.email);
-    } catch {
-      // Email failure should not block publish
+    } catch (err) {
+      console.error("[email] Failed to send case_ready for case", parsed.data.caseId, err);
+      await admin.from("case_updates").insert({
+        case_id: parsed.data.caseId,
+        author_id: userId,
+        content: "Email notification (case ready) failed to send. Staff should follow up manually.",
+        is_internal: true,
+      });
     }
   }
 
