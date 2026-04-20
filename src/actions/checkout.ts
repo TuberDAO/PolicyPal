@@ -112,7 +112,7 @@ export async function createCheckoutSession(
   // RLS ensures only the case owner can see their own case
   const { data: caseRow } = await supabase
     .from("cases")
-    .select("id, status, turnaround")
+    .select("id, status, turnaround, stripe_checkout_session_id")
     .eq("id", parsed.data.caseId)
     .single();
 
@@ -126,6 +126,25 @@ export async function createCheckoutSession(
 
   const { NEXT_PUBLIC_SITE_URL } = getClientEnv();
   const stripe = getStripe();
+
+  // If the case already has a Stripe session and it is still open, reuse it.
+  // This prevents supersession — avoids issuing multiple live sessions for the
+  // same draft case, which otherwise creates a race where the first session
+  // can be paid after a second has been recorded on the case.
+  if (caseRow.stripe_checkout_session_id) {
+    try {
+      const existing = await stripe.checkout.sessions.retrieve(
+        caseRow.stripe_checkout_session_id,
+      );
+      if (existing.status === "open" && existing.url) {
+        return { url: existing.url };
+      }
+    } catch {
+      // Retrieval failure (session not found, expired, etc.) — fall through
+      // and create a fresh session. The webhook is resilient to any paid
+      // session for this case regardless of which ID is stored here.
+    }
+  }
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",

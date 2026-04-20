@@ -5,6 +5,12 @@ import { getStripe } from "@/lib/stripe";
 import { getServerEnv } from "@/env";
 import { createAdminClient } from "@/lib/supabase/admin";
 
+// Stripe signature verification requires the Node crypto runtime and the raw
+// request body. Force the Node runtime and opt out of any static/caching
+// behavior so this route always executes per-request.
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 /**
  * Stripe webhook endpoint — receives checkout.session.completed and other events.
  * Verifies signature and transitions case draft → submitted exactly once.
@@ -42,7 +48,7 @@ export async function POST(request: NextRequest) {
 
     const { data: caseRow } = await supabase
       .from("cases")
-      .select("id, status, stripe_checkout_session_id")
+      .select("id, status")
       .eq("id", caseId)
       .single();
 
@@ -50,15 +56,24 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Case not found" }, { status: 400 });
     }
 
-    // Idempotent: if already beyond draft, treat as already processed
+    // Idempotent: if already beyond draft, treat as already processed.
     if (caseRow.status !== "draft") {
       return NextResponse.json({ received: true });
     }
 
-    // Only the session recorded on the case may transition it. Stale or
-    // abandoned sessions (superseded by a newer createCheckoutSession call)
-    // are acknowledged without modifying the case.
-    if (caseRow.stripe_checkout_session_id !== session.id) {
+    // NOTE: we intentionally do NOT gate on stripe_checkout_session_id
+    // matching. Multiple sessions may have been issued for the same draft
+    // case (e.g. the customer opened checkout twice). Any paid session whose
+    // metadata points at a draft case for this account is a legitimate
+    // payment for that case and must transition it to submitted.
+    //
+    // The session.id of the session that actually completed is recorded
+    // below for auditability, overwriting any previously-stored session id.
+    //
+    // Only paid sessions should transition the case. "open"/"expired" etc.
+    // completed events (e.g. from async payments that ultimately fail) must
+    // not mark the case as paid.
+    if (session.payment_status !== "paid" && session.payment_status !== "no_payment_required") {
       return NextResponse.json({ received: true });
     }
 
@@ -74,12 +89,12 @@ export async function POST(request: NextRequest) {
         status: "submitted",
         paid_at: now,
         submitted_at: now,
+        stripe_checkout_session_id: session.id,
         stripe_payment_intent_id: paymentIntent,
         amount_cents: session.amount_total ?? null,
       })
       .eq("id", caseId)
-      .eq("status", "draft") // belt-and-suspenders against concurrent replays
-      .eq("stripe_checkout_session_id", session.id) // only the matching session
+      .eq("status", "draft") // guard against concurrent replays / double-processing
       .select("id");
 
     if (updateError) {
