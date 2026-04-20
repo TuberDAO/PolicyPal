@@ -146,7 +146,7 @@ export function CheckoutSummary({
             <TurnaroundOption
               label="Quick Question"
               price={PRICING.QUICK_QUESTION_PRICE_USD}
-              turnaroundCopy="One specific question answered"
+              turnaroundCopy="One health insurance, billing, or benefits question"
               selected={turnaround === "quick_question"}
               disabled={isSaving}
               onClick={() => handleTurnaroundChange("quick_question")}
@@ -175,6 +175,28 @@ export function CheckoutSummary({
 
         {saveError && <p className="text-sm text-error">{saveError}</p>}
       </section>
+
+      {/* Trust indicators */}
+      <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+        <span className="flex items-center gap-1.5 text-xs text-muted">
+          <svg aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clipRule="evenodd" />
+          </svg>
+          Clear pricing
+        </span>
+        <span className="flex items-center gap-1.5 text-xs text-muted">
+          <svg aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M9.661 2.237a.531.531 0 0 1 .678 0 11.947 11.947 0 0 0 7.078 2.749.5.5 0 0 1 .479.425c.069.52.104 1.05.104 1.589 0 5.162-3.26 9.563-7.834 11.256a.48.48 0 0 1-.332 0C5.26 16.563 2 12.162 2 7c0-.538.035-1.069.104-1.589a.5.5 0 0 1 .48-.425 11.947 11.947 0 0 0 7.077-2.749Z" clipRule="evenodd" />
+          </svg>
+          No subscription
+        </span>
+        <span className="flex items-center gap-1.5 text-xs text-muted">
+          <svg aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+          </svg>
+          One case manager
+        </span>
+      </div>
 
       {/* Payment CTA */}
       <div className="pt-2">

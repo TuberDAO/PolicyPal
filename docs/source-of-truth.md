@@ -37,7 +37,7 @@ Order is fixed:
 | Offering | Price (USD) |
 |----------|----------------|
 | Quick Question | **$19** |
-| Full Case Pack (Standard) | **$67** promo / **$99** regular |
+| Full Case Pack (Standard) | **$97** |
 | Rush Review | **$149** |
 
 **Quick Question** is for one specific insurance, billing, or benefits question — a single clear written answer. It is not a full case review, escalation pack, or deep document review.

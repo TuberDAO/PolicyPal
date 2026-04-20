@@ -7,8 +7,8 @@ import type { User } from "@supabase/supabase-js";
 // ---------------------------------------------------------------------------
 const HERO = {
   headline: "Need help with a denied claim, medical bill, or insurance problem?",
-  body: "We review your situation and build a step-by-step plan — who to contact, what to say, and how to escalate when needed.",
-  reassurance: "You'll be assigned one case manager from intake to delivery.",
+  body: "We examine your case and give you a clear, step by step plan to challenge denials, correct billing problems, and push your case forward fast",
+  reassurance: "One case manager handles your case from start to finish.",
   cta: {
     primaryLoggedIn: "Start a new case",
     primaryLoggedOut: "Start your review",
@@ -26,7 +26,7 @@ const HERO = {
 // ---------------------------------------------------------------------------
 const PORTRAIT = {
   src: "/images/hero-portrait.png",
-  alt: "A person reviewing insurance documents with PolicyPal",
+  alt: "A person reviewing insurance documents with AppealSupportPro",
   width: 1024,
   height: 682,
 } as const;
@@ -67,7 +67,7 @@ export function HeroSection({ user }: { user: User | null }) {
             {HERO.headline}
           </h1>
 
-          <p className="mt-5 max-w-prose text-base leading-relaxed text-muted sm:text-lg">
+          <p className="mt-5 max-w-[36rem] text-base leading-relaxed text-muted text-pretty sm:text-lg">
             {HERO.body}
           </p>
 
@@ -112,6 +112,40 @@ export function HeroSection({ user }: { user: User | null }) {
             </svg>
             {HERO.reassurance}
           </p>
+
+          {/* Trust indicators */}
+          <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+            <span className="flex items-center gap-1.5 text-xs text-muted">
+              <svg aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z" clipRule="evenodd" />
+              </svg>
+              Secure document upload
+            </span>
+            <span className="flex items-center gap-1.5 text-xs text-muted">
+              <svg aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M9.661 2.237a.531.531 0 0 1 .678 0 11.947 11.947 0 0 0 7.078 2.749.5.5 0 0 1 .479.425c.069.52.104 1.05.104 1.589 0 5.162-3.26 9.563-7.834 11.256a.48.48 0 0 1-.332 0C5.26 16.563 2 12.162 2 7c0-.538.035-1.069.104-1.589a.5.5 0 0 1 .48-.425 11.947 11.947 0 0 0 7.077-2.749Z" clipRule="evenodd" />
+              </svg>
+              Private case review
+            </span>
+            <span className="flex items-center gap-1.5 text-xs text-muted">
+              <svg aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M4.93 4.93C3.12 6.74 2 9.24 2 12a8 8 0 1 0 8-8c-2.76 0-5.26 1.12-7.07 2.93ZM10 6a1 1 0 0 1 1 1v3.586l2.707 2.707a1 1 0 0 1-1.414 1.414l-3-3A1 1 0 0 1 9 11V7a1 1 0 0 1 1-1Z" clipRule="evenodd" />
+              </svg>
+              Clear pricing
+            </span>
+            <span className="flex items-center gap-1.5 text-xs text-muted">
+              <svg aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M6.5 3A1.5 1.5 0 0 0 5 4.5v1.905A5.968 5.968 0 0 0 4 10c0 1.477.534 2.827 1.41 3.866l-.707.707a.75.75 0 1 0 1.06 1.06l.707-.706A5.97 5.97 0 0 0 10 16a5.97 5.97 0 0 0 3.53-1.073l.707.707a.75.75 0 1 0 1.06-1.06l-.707-.708A5.968 5.968 0 0 0 16 10a5.968 5.968 0 0 0-1-3.266V4.5A1.5 1.5 0 0 0 13.5 3h-7Z" />
+              </svg>
+              No subscription
+            </span>
+            <span className="flex items-center gap-1.5 text-xs text-muted">
+              <svg aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
+              </svg>
+              Reviewed by an experienced case specialist
+            </span>
+          </div>
         </div>
 
         {/* ── Right column — portrait ── */}

@@ -311,7 +311,7 @@ export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormPr
 
       <p className="flex items-start gap-2 rounded-lg bg-accent-light px-4 py-3 text-xs leading-relaxed text-muted">
         <LockIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />
-        Secure upload. You can anonymize documents before sending them.
+        Secure document upload. Private case review. You can anonymize documents before sending them.
       </p>
 
       {/* File selection */}

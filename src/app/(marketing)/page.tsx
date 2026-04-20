@@ -6,6 +6,7 @@ import { HowItWorksSection } from "@/components/marketing/how-it-works-section";
 import { WhatYouGetSection } from "@/components/marketing/what-you-get-section";
 import { PricingSection } from "@/components/marketing/pricing-section";
 import { TrustedSourcesSection } from "@/components/marketing/trusted-sources-section";
+import { TestimonialsSection } from "@/components/marketing/testimonials-section";
 import { FaqSection } from "@/components/marketing/faq-section";
 import { createClient } from "@/lib/supabase/server";
 
@@ -18,9 +19,9 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection user={user} />
-      <OutcomesSection />
       {/* Scrolling source strip — sits flush beneath the hero */}
       <TrustedSourcesSection />
+      <OutcomesSection />
       <ExamplesSection />
       <HowItWorksSection />
       <WhatYouGetSection />
@@ -55,6 +56,8 @@ export default async function HomePage() {
           </Link>
         )}
       </section>
+
+      <TestimonialsSection />
 
       <FaqSection />
     </>

@@ -5,7 +5,7 @@ import {
   CASE_STATUS_LABELS,
   ISSUE_TYPE_LABELS,
   TURNAROUND,
-  formatExpectedBy,
+  formatExpectedByShort,
 } from "@/constants";
 
 export const metadata: Metadata = { title: "Dashboard" };
@@ -66,9 +66,9 @@ export default async function DashboardPage({
 
   const turnaroundExpectedBy =
     pendingCase?.turnaround === "rush"
-      ? formatExpectedBy(TURNAROUND.RUSH_DAYS)
+      ? formatExpectedByShort(TURNAROUND.RUSH_DAYS)
       : pendingCase?.turnaround === "standard"
-        ? formatExpectedBy(TURNAROUND.STANDARD_DAYS)
+        ? formatExpectedByShort(TURNAROUND.STANDARD_DAYS)
         : null;
 
   // Merge: pending case at top, then submitted cases. Overlap is impossible
@@ -95,17 +95,74 @@ export default async function DashboardPage({
       </div>
 
       {paid && (
-        <div className="rounded-lg border border-border bg-surface px-4 py-3 text-sm">
-          <p className="font-medium text-foreground">
-            Payment confirmed. Your case has been submitted.
-          </p>
-          {turnaroundExpectedBy ? (
-            <p className="mt-1 text-muted">{turnaroundExpectedBy}</p>
-          ) : (
-            <p className="mt-1 text-muted">
-              We will review your case and be in touch shortly.
-            </p>
-          )}
+        <div
+          role="status"
+          aria-live="polite"
+          className="mx-auto w-full max-w-xl rounded-2xl border border-accent/25 bg-gradient-to-br from-accent-light/70 via-surface to-surface p-6 shadow-sm ring-1 ring-accent/5 sm:p-8"
+        >
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
+            <div
+              aria-hidden="true"
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent"
+            >
+              <svg
+                className="h-6 w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2.25}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+            </div>
+
+            <div className="min-w-0 flex-1">
+              <h2 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
+                Case submitted successfully
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted sm:text-base">
+                We&rsquo;ve received your case and it is now in review.
+              </p>
+              {turnaroundExpectedBy ? (
+                <p className="mt-3 text-sm font-medium text-foreground sm:text-base">
+                  {turnaroundExpectedBy}
+                </p>
+              ) : (
+                <p className="mt-3 text-sm font-medium text-foreground sm:text-base">
+                  We will review your case and be in touch shortly.
+                </p>
+              )}
+
+              <ul className="mt-5 space-y-2.5 border-t border-accent/15 pt-5">
+                {[
+                  "Reviewed by an experienced case specialist",
+                  "You\u2019ll receive a clear step by step plan",
+                  "You\u2019ll be notified as soon as it\u2019s ready",
+                ].map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-2.5 text-sm leading-relaxed text-muted sm:text-[0.95rem]"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className="mt-0.5 h-4 w-4 shrink-0 text-success"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       )}
 

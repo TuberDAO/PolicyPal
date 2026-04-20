@@ -1,19 +1,19 @@
 /**
- * PolicyPal — Locked Business Constants
+ * AppealSupportPro — Locked Business Constants
  *
  * Central source of truth for brand copy, pricing, and product configuration.
  * Changes here affect the entire app. Do not scatter these values into components.
  */
 
 export const BRAND = {
-  name: "PolicyPal",
+  name: "AppealSupportPro",
   descriptor: "Bills, claims & coverage help",
 } as const;
 
 export const PRICING = {
   QUICK_QUESTION_PRICE_USD: 19,
-  STANDARD_PROMO_PRICE_USD: 67,
-  STANDARD_REGULAR_PRICE_USD: 99,
+  STANDARD_PROMO_PRICE_USD: 97,
+  STANDARD_REGULAR_PRICE_USD: 97,
   RUSH_PRICE_USD: 149,
 } as const;
 
@@ -49,6 +49,20 @@ export function formatExpectedBy(businessDays: number): string {
     day: "numeric",
   });
   return `By ${formatted} at the latest, often sooner. Public holidays may add a day.`;
+}
+
+/**
+ * Compact expected-by copy used on confirmation surfaces.
+ * Example: "Expected by Mon, Apr 14, often sooner."
+ */
+export function formatExpectedByShort(businessDays: number): string {
+  const target = addBusinessDays(new Date(), businessDays);
+  const formatted = target.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+  return `Expected by ${formatted}, often sooner.`;
 }
 
 export const UPLOAD_LIMITS = {

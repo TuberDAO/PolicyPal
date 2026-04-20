@@ -18,8 +18,8 @@ const sora = Sora({
 
 export const metadata: Metadata = {
   title: {
-    default: "PolicyPal — Bills, claims & coverage help",
-    template: "%s | PolicyPal",
+    default: "AppealSupportPro — Bills, claims & coverage help",
+    template: "%s | AppealSupportPro",
   },
   description:
     "Expert help with denied claims, confusing medical bills, and health insurance problems. A real person reviews your case and delivers a step-by-step action plan.",

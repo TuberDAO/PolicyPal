@@ -17,16 +17,16 @@ export async function sendNeedMoreInfoEmail(
   await resend.emails.send({
     from: RESEND_FROM_EMAIL,
     to: customerEmail,
-    subject: "We need a bit more information for your PolicyPal case",
+    subject: "We need a bit more information for your AppealSupportPro case",
     text: `Hi,
 
 We reviewed your case and need a bit more information before we can finish your plan.
 
-Please log in to your PolicyPal account to view the request and reply in the platform.
+Please log in to your AppealSupportPro account to view the request and reply in the platform.
 
 ${NEXT_PUBLIC_SITE_URL}/dashboard
 
-PolicyPal`,
+AppealSupportPro`,
   });
 }
 
@@ -44,10 +44,10 @@ export async function sendCaseReadyEmail(
   await resend.emails.send({
     from: RESEND_FROM_EMAIL,
     to: customerEmail,
-    subject: "Your PolicyPal case is ready",
+    subject: "Your AppealSupportPro case is ready",
     text: `Hi,
 
-Your PolicyPal case is ready to view.
+Your AppealSupportPro case is ready to view.
 
 Please log in to your account to read your plan.
 
@@ -55,7 +55,7 @@ If you have additional questions, you can add them through the platform.
 
 ${NEXT_PUBLIC_SITE_URL}/dashboard
 
-PolicyPal`,
+AppealSupportPro`,
   });
 }
 
@@ -73,15 +73,15 @@ export async function sendCaseUpdatedEmail(
   await resend.emails.send({
     from: RESEND_FROM_EMAIL,
     to: customerEmail,
-    subject: "There is an update on your PolicyPal case",
+    subject: "There is an update on your AppealSupportPro case",
     text: `Hi,
 
-There is a new update on your PolicyPal case.
+There is a new update on your AppealSupportPro case.
 
 Please log in to your account to view it and reply if needed.
 
 ${NEXT_PUBLIC_SITE_URL}/dashboard
 
-PolicyPal`,
+AppealSupportPro`,
   });
 }

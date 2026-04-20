@@ -8,14 +8,15 @@ import { useState } from "react";
 // ---------------------------------------------------------------------------
 const FAQS: { question: string; answer: string | string[] }[] = [
   {
-    question: "What does PolicyPal help with?",
+    question: "What does AppealSupportPro help with?",
     answer:
-      "PolicyPal helps with denied claims, medical bills that seem wrong or too high, prior authorization problems, coverage issues, EOB confusion, network and provider billing problems, and other health insurance issues. If you are not sure what category your problem fits into, you can still submit your case.",
+      "AppealSupportPro helps with denied claims, medical bills that seem wrong or too high, prior authorization problems, coverage issues, EOB confusion, network and provider billing problems, and other health insurance issues. If you are not sure what category your problem fits into, you can still submit your case.",
   },
   {
     question: "What do I actually get?",
     answer: [
-      "You get a tailored action plan built around your specific case. We review your account of what happened, the documents you provide, the medical or billing issues involved, and the rules that may apply to your plan or claim. Your plan can include the best next steps, who to contact, what order to do things in, what to ask for, what to say in calls or emails, and when escalation may make sense.",
+      "You get a tailored action plan built around your specific case. It is designed to help you move quickly, avoid dead ends, and take the strongest next step for your denial, billing issue, or insurance problem.",
+      "We review your account of what happened, the documents you provide, the medical or billing issues involved, and the rules that may apply to your plan or claim. Your case pack can include the best next steps, who to contact, what order to do things in, what to ask for, ready to use phone scripts, email drafts, letters, or portal wording where needed, and when escalation may make sense.",
       "Where relevant, we also look at supporting medical guidance, policy language, and official rules to help strengthen your position. That may include showing why requested care is supported, where a bill or denial may need closer review, or whether the process followed by the insurer appears inconsistent with the documents and rules that govern the case.",
       "The goal is to give you a practical plan that is clear, well structured, and easier to act on under stress. Instead of leaving you to figure things out alone, we help turn a confusing problem into a step by step route forward.",
     ],
@@ -26,7 +27,7 @@ const FAQS: { question: string; answer: string | string[] }[] = [
       "No. Some people come with one urgent question, while others are dealing with a much bigger problem. Appeals are one important use case, but we also help with billing disputes, coverage problems, prior authorization issues, and other insurance or administrative issues.",
   },
   {
-    question: "How much does PolicyPal cost?",
+    question: "How much does AppealSupportPro cost?",
     answer:
       "Pricing is shown clearly before payment. You will see the cost before you pay, with no surprise paywall.",
   },
@@ -48,7 +49,7 @@ const FAQS: { question: string; answer: string | string[] }[] = [
   {
     question: "Will you contact my insurer, hospital, or employer for me?",
     answer:
-      "No. PolicyPal does not contact insurers, providers, or employers on your behalf. We give you a clear plan for what to do next, including who to contact and what to say.",
+      "No. AppealSupportPro does not contact insurers, providers, or employers on your behalf. We give you a clear plan for what to do next, including who to contact and what to say.",
   },
   {
     question: "Can this reduce or remove my bill?",
@@ -68,7 +69,7 @@ const FAQS: { question: string; answer: string | string[] }[] = [
   {
     question: "Is this legal advice or medical advice?",
     answer:
-      "No. PolicyPal is not a law firm, medical provider, or emergency service. We provide practical guidance to help you deal with insurance and billing problems, but we do not replace a lawyer, doctor, or urgent medical care.",
+      "No. AppealSupportPro is not a law firm, medical provider, or emergency service. We provide practical guidance to help you deal with insurance and billing problems, but we do not replace a lawyer, doctor, or urgent medical care.",
   },
   {
     question: "Is my information private and secure?",
@@ -112,7 +113,7 @@ export function FaqSection() {
           Frequently asked questions
         </h2>
         <p className="mt-3 text-base leading-relaxed text-muted">
-          Quick answers about how PolicyPal works
+          Quick answers about how AppealSupportPro works
         </p>
 
         {/* Accordion list */}
