@@ -45,7 +45,7 @@ export default async function EditCasePage({
   async function handleSave(formData: FormData) {
     "use server";
 
-    const issueTypes = formData.getAll("issue_types") as string[];
+    const issueTypes = formData.getAll("issue_types") as (typeof ISSUE_TYPES)[number][];
     const state = (formData.get("state") as string) ?? "";
     const description = (formData.get("description") as string) ?? "";
     const insurerName = (formData.get("insurer_name") as string) || undefined;
