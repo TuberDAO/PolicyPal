@@ -123,7 +123,7 @@ export default async function DashboardPage({
                 Case submitted successfully
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-muted sm:text-base">
-                We&rsquo;ve received your case and it is now in review.
+                Payment received. Your case has been submitted and is now in review.
               </p>
               {turnaroundExpectedBy ? (
                 <p className="mt-3 text-sm font-medium text-foreground sm:text-base">

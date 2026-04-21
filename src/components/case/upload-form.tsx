@@ -278,9 +278,14 @@ export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormPr
   async function handleDeleteExisting(fileId: string) {
     if (!onDeleteFile || removingId) return;
     setRemovingId(fileId);
+    setRemovedIds((prev) => new Set([...prev, fileId]));
     const result = await onDeleteFile(fileId);
-    if (!result?.error) {
-      setRemovedIds((prev) => new Set([...prev, fileId]));
+    if (result?.error) {
+      setRemovedIds((prev) => {
+        const next = new Set(prev);
+        next.delete(fileId);
+        return next;
+      });
     }
     setRemovingId(null);
   }
