@@ -286,7 +286,14 @@ export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormPr
         next.delete(fileId);
         return next;
       });
+      setRemovingId(null);
+      return;
     }
+    // Pull the refreshed existingFiles prop from the server so the list
+    // stays in sync once the optimistic hide is released. Without this,
+    // revalidatePath() in the server action does not reliably re-render
+    // this route in production, which leaves the deleted row visible.
+    router.refresh();
     setRemovingId(null);
   }
 
