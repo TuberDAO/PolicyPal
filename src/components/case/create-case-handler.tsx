@@ -60,7 +60,7 @@ export function CreateCaseHandler() {
       // Storage unavailable — proceed without attribution.
     }
 
-    createCase({ ...input, attribution }).then((res) => {
+    createCase({ ...input, attribution: attribution as Parameters<typeof createCase>[0]["attribution"] }).then((res) => {
       if (res.error) {
         setStatus("error");
         setErrorMessage(res.error);

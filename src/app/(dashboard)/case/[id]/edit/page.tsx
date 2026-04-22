@@ -46,7 +46,7 @@ export default async function EditCasePage({
     "use server";
 
     const issueTypes = formData.getAll("issue_types") as (typeof ISSUE_TYPES)[number][];
-    const state = (formData.get("state") as string) ?? "";
+    const state = (formData.get("state") ?? "") as (typeof US_STATE_CODES)[number];
     const description = (formData.get("description") as string) ?? "";
     const insurerName = (formData.get("insurer_name") as string) || undefined;
     const providerName = (formData.get("provider_name") as string) || undefined;
