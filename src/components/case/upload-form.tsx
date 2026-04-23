@@ -56,6 +56,7 @@ export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormPr
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const [removedIds, setRemovedIds] = useState<Set<string>>(new Set());
   const [removingId, setRemovingId] = useState<string | null>(null);
+  const [showRemoveNotice, setShowRemoveNotice] = useState(false);
   const batchId = useRef(crypto.randomUUID()).current;
   const cameraRef = useRef<HTMLInputElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -294,6 +295,7 @@ export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormPr
     // revalidatePath() in the server action does not reliably re-render
     // this route in production, which leaves the deleted row visible.
     router.refresh();
+    setShowRemoveNotice(true);
     setRemovingId(null);
   }
 
@@ -452,6 +454,13 @@ export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormPr
             </li>
           ))}
         </ul>
+      )}
+
+      {/* Remove notice */}
+      {showRemoveNotice && (
+        <p className="text-xs text-muted">
+          This file has been removed. It may still appear here until you refresh the page.
+        </p>
       )}
 
       {/* Batch counter */}
