@@ -6,7 +6,7 @@
  */
 
 export const BRAND = {
-  name: "AppealSupportPro",
+  name: "WinYourAppeal",
   descriptor: "Bills, claims & coverage help",
 } as const;
 
@@ -18,7 +18,7 @@ export const PRICING = {
 } as const;
 
 export const TURNAROUND = {
-  STANDARD_LABEL: "Delivered within 3 business days, often faster",
+  STANDARD_LABEL: "Delivered within 3 business days, often sooner",
   RUSH_LABEL: "Delivered within 1 business day",
   STANDARD_DAYS: 3,
   RUSH_DAYS: 1,

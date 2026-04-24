@@ -6,16 +6,16 @@ export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-16 space-y-10">
       <div className="space-y-2">
-        <h1 className="text-3xl font-semibold tracking-tight">Privacy Policy for AppealSupportPro</h1>
+        <h1 className="text-3xl font-semibold tracking-tight">Privacy Policy for WinYourAppeal</h1>
         <p className="text-sm text-muted">Effective Date: [INSERT DATE]</p>
         <p className="text-sm text-muted">Last Updated: [INSERT DATE]</p>
       </div>
 
       <p>
-        AppealSupportPro, operated by [LEGAL ENTITY NAME] (&ldquo;AppealSupportPro,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), provides a U.S.&#8209;focused service that helps people understand, organize, and respond to health insurance and medical billing issues. This Privacy Policy explains how we collect, use, disclose, retain, and protect personal information when you visit our website, create an account, submit or save a case, upload documents, purchase services, contact us, or otherwise use AppealSupportPro.
+        WinYourAppeal, operated by [LEGAL ENTITY NAME] (&ldquo;WinYourAppeal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), provides a U.S.&#8209;focused service that helps people understand, organize, and respond to health insurance and medical billing issues. This Privacy Policy explains how we collect, use, disclose, retain, and protect personal information when you visit our website, create an account, submit or save a case, upload documents, purchase services, contact us, or otherwise use WinYourAppeal.
       </p>
       <p>
-        Because AppealSupportPro may involve insurance, billing, and health&#8209;related materials, some of the information we handle may be sensitive personal information and, in some states, consumer health data.
+        Because WinYourAppeal may involve insurance, billing, and health&#8209;related materials, some of the information we handle may be sensitive personal information and, in some states, consumer health data.
       </p>
 
       <Section title="1. Scope">
@@ -34,19 +34,19 @@ export default function PrivacyPage() {
         </p>
       </Section>
 
-      <Section title="2. Who may use AppealSupportPro">
+      <Section title="2. Who may use WinYourAppeal">
         <p>
-          AppealSupportPro is intended for people in the United States who are using the service for themselves or acting for another person as a parent, guardian, caregiver, family member, or other authorized representative.
+          WinYourAppeal is intended for people in the United States who are using the service for themselves or acting for another person as a parent, guardian, caregiver, family member, or other authorized representative.
         </p>
         <p>
-          If you use AppealSupportPro for another person, you represent that you have authority to provide information to us and to act on that person&rsquo;s behalf.
+          If you use WinYourAppeal for another person, you represent that you have authority to provide information to us and to act on that person&rsquo;s behalf.
         </p>
-        <p>AppealSupportPro is not intended for children under 18 acting on their own.</p>
+        <p>WinYourAppeal is not intended for children under 18 acting on their own.</p>
       </Section>
 
       <Section title="3. Information we collect">
         <Subsection title="A. Information you provide directly">
-          <p>Depending on how you use AppealSupportPro, you may provide:</p>
+          <p>Depending on how you use WinYourAppeal, you may provide:</p>
           <ul>
             <li>your name</li>
             <li>your email address</li>
@@ -134,7 +134,7 @@ export default function PrivacyPage() {
 
       <Section title="4. Sensitive information and consumer health data">
         <p>
-          Because of the nature of AppealSupportPro&rsquo;s services, we may collect and process sensitive information and, in some jurisdictions, consumer health data. This may include information about:
+          Because of the nature of WinYourAppeal&rsquo;s services, we may collect and process sensitive information and, in some jurisdictions, consumer health data. This may include information about:
         </p>
         <ul>
           <li>insurance coverage</li>
@@ -148,7 +148,7 @@ export default function PrivacyPage() {
           <li>other information that may reasonably reveal health&#8209;related circumstances</li>
         </ul>
         <p>
-          We use this information only for the purposes described in this Privacy Policy, to provide and support the service you requested, to secure and improve AppealSupportPro, and to comply with applicable law.
+          We use this information only for the purposes described in this Privacy Policy, to provide and support the service you requested, to secure and improve WinYourAppeal, and to comply with applicable law.
         </p>
       </Section>
 
@@ -174,7 +174,7 @@ export default function PrivacyPage() {
 
       <Section title="6. Human review and service delivery">
         <p>
-          At launch, AppealSupportPro includes human review as part of paid case handling. Your case materials may be accessed by employees, contractors, or service providers who need access to deliver the service, provide support, maintain systems, prevent fraud, or comply with legal obligations.
+          At launch, WinYourAppeal includes human review as part of paid case handling. Your case materials may be accessed by employees, contractors, or service providers who need access to deliver the service, provide support, maintain systems, prevent fraud, or comply with legal obligations.
         </p>
         <p>We aim to limit access to case information to people with a legitimate business need to know.</p>
       </Section>
@@ -183,7 +183,7 @@ export default function PrivacyPage() {
         <p>We may disclose personal information in the following circumstances:</p>
 
         <Subsection title="A. Service providers">
-          <p>We may disclose information to vendors and service providers that help us operate AppealSupportPro, such as providers of:</p>
+          <p>We may disclose information to vendors and service providers that help us operate WinYourAppeal, such as providers of:</p>
           <ul>
             <li>hosting and infrastructure</li>
             <li>authentication</li>
@@ -206,7 +206,7 @@ export default function PrivacyPage() {
           <p>We may disclose information if we reasonably believe it is necessary to:</p>
           <ul>
             <li>comply with law, regulation, legal process, or government request</li>
-            <li>protect the rights, safety, or property of users, AppealSupportPro, or others</li>
+            <li>protect the rights, safety, or property of users, WinYourAppeal, or others</li>
             <li>investigate fraud, abuse, misuse, or security issues</li>
             <li>enforce our terms and other agreements</li>
           </ul>
@@ -214,7 +214,7 @@ export default function PrivacyPage() {
 
         <Subsection title="D. Corporate transactions">
           <p>
-            If AppealSupportPro is involved in a merger, financing, acquisition, reorganization, sale of assets, bankruptcy, or similar transaction, personal information may be disclosed as part of that process, subject to applicable confidentiality and legal requirements.
+            If WinYourAppeal is involved in a merger, financing, acquisition, reorganization, sale of assets, bankruptcy, or similar transaction, personal information may be disclosed as part of that process, subject to applicable confidentiality and legal requirements.
           </p>
         </Subsection>
 
@@ -384,7 +384,7 @@ export default function PrivacyPage() {
 
       <Section title="18. International processing">
         <p>
-          AppealSupportPro is intended for U.S. users. We aim to use U.S.&#8209;based processing where practical, but some service providers may process data outside your state or outside the United States depending on their infrastructure and service model.
+          WinYourAppeal is intended for U.S. users. We aim to use U.S.&#8209;based processing where practical, but some service providers may process data outside your state or outside the United States depending on their infrastructure and service model.
         </p>
       </Section>
 
@@ -403,7 +403,7 @@ export default function PrivacyPage() {
 
       <Section title="20. Children">
         <p>
-          AppealSupportPro is not intended for children under 18 acting on their own. If you believe a child has provided personal information in violation of applicable law, contact us and we will review and respond appropriately.
+          WinYourAppeal is not intended for children under 18 acting on their own. If you believe a child has provided personal information in violation of applicable law, contact us and we will review and respond appropriately.
         </p>
       </Section>
 
@@ -416,7 +416,7 @@ export default function PrivacyPage() {
       <Section title="22. Contact us">
         <p>If you have questions, concerns, or privacy requests, contact us at:</p>
         <address className="not-italic space-y-1">
-          <p>AppealSupportPro</p>
+          <p>WinYourAppeal</p>
           <p>[LEGAL ENTITY NAME]</p>
           <p>[BUSINESS ADDRESS]</p>
           <p>[PRIVACY EMAIL]</p>

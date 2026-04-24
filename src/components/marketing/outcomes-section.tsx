@@ -114,7 +114,7 @@ export function OutcomesSection() {
               <div className="mt-auto flex justify-end">
                 <img
                   src="/images/outcomes-people.png"
-                  alt="Four people smiling, supported by AppealSupportPro"
+                  alt="Four people smiling, supported by WinYourAppeal"
                   className="h-[200px] w-auto select-none sm:h-[240px] lg:h-[280px]"
                 />
               </div>

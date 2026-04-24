@@ -53,7 +53,7 @@ export function ExamplesSection() {
               What we build into your case
             </h2>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-muted">
-              AppealSupportPro builds a stronger case using your documented condition, clinical evidence, coverage criteria, and the state and federal rules that govern how your claim should be reviewed.
+              WinYourAppeal builds a stronger case using your documented condition, clinical evidence, coverage criteria, and the state and federal rules that govern how your claim should be reviewed.
             </p>
 
             <div className="mt-8 flex flex-col" role="tablist" aria-label="Case components">

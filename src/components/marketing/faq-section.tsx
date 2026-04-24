@@ -8,9 +8,9 @@ import { useState } from "react";
 // ---------------------------------------------------------------------------
 const FAQS: { question: string; answer: string | string[] }[] = [
   {
-    question: "What does AppealSupportPro help with?",
+    question: "What does WinYourAppeal help with?",
     answer:
-      "AppealSupportPro helps with denied claims, medical bills that seem wrong or too high, prior authorization problems, coverage issues, EOB confusion, network and provider billing problems, and other health insurance issues. If you are not sure what category your problem fits into, you can still submit your case.",
+      "WinYourAppeal helps with denied claims, medical bills that seem wrong or too high, prior authorization problems, coverage issues, EOB confusion, network and provider billing problems, and other health insurance issues. If you are not sure what category your problem fits into, you can still submit your case.",
   },
   {
     question: "What do I actually get?",
@@ -27,7 +27,7 @@ const FAQS: { question: string; answer: string | string[] }[] = [
       "No. Some people come with one urgent question, while others are dealing with a much bigger problem. Appeals are one important use case, but we also help with billing disputes, coverage problems, prior authorization issues, and other insurance or administrative issues.",
   },
   {
-    question: "How much does AppealSupportPro cost?",
+    question: "How much does WinYourAppeal cost?",
     answer:
       "Pricing is shown clearly before payment. You will see the cost before you pay, with no surprise paywall.",
   },
@@ -49,7 +49,7 @@ const FAQS: { question: string; answer: string | string[] }[] = [
   {
     question: "Will you contact my insurer, hospital, or employer for me?",
     answer:
-      "No. AppealSupportPro does not contact insurers, providers, or employers on your behalf. We give you a clear plan for what to do next, including who to contact and what to say.",
+      "No. WinYourAppeal does not contact insurers, providers, or employers on your behalf. We give you a clear plan for what to do next, including who to contact and what to say.",
   },
   {
     question: "Can this reduce or remove my bill?",
@@ -69,7 +69,7 @@ const FAQS: { question: string; answer: string | string[] }[] = [
   {
     question: "Is this legal advice or medical advice?",
     answer:
-      "No. AppealSupportPro is not a law firm, medical provider, or emergency service. We provide practical guidance to help you deal with insurance and billing problems, but we do not replace a lawyer, doctor, or urgent medical care.",
+      "No. WinYourAppeal is not a law firm, medical provider, or emergency service. We provide practical guidance to help you deal with insurance and billing problems, but we do not replace a lawyer, doctor, or urgent medical care.",
   },
   {
     question: "Is my information private and secure?",
@@ -113,7 +113,7 @@ export function FaqSection() {
           Frequently asked questions
         </h2>
         <p className="mt-3 text-base leading-relaxed text-muted">
-          Quick answers about how AppealSupportPro works
+          Quick answers about how WinYourAppeal works
         </p>
 
         {/* Accordion list */}

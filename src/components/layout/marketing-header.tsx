@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { User } from "@supabase/supabase-js";
-import { BRAND } from "@/constants";
 
 export function MarketingHeader({
   user,
@@ -12,12 +11,11 @@ export function MarketingHeader({
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur-sm">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
-        {/* Text wordmark only — no icon or SVG mark */}
         <Link
           href="/"
-          className="shrink-0 font-heading text-lg font-semibold tracking-tight text-foreground"
+          className="inline-flex h-9 shrink-0 items-center font-heading text-lg font-semibold tracking-tight text-foreground"
         >
-          {BRAND.name}
+          WinYourAppeal
         </Link>
 
         <div className="flex items-center gap-4 sm:gap-6">

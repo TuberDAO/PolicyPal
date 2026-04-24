@@ -26,7 +26,7 @@ const HERO = {
 // ---------------------------------------------------------------------------
 const PORTRAIT = {
   src: "/images/hero-portrait.png",
-  alt: "A person reviewing insurance documents with AppealSupportPro",
+  alt: "A person reviewing insurance documents with WinYourAppeal",
   width: 1024,
   height: 682,
 } as const;

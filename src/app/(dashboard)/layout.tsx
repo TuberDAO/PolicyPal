@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { BRAND } from "@/constants";
 
 /**
  * Dashboard layout — wraps all authenticated customer pages.
@@ -36,9 +35,9 @@ export default async function DashboardLayout({
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4">
           <Link
             href="/"
-            className="font-heading text-base font-semibold tracking-tight"
+            className="inline-flex h-9 items-center font-heading text-lg font-semibold tracking-tight text-foreground"
           >
-            {BRAND.name}
+            WinYourAppeal
           </Link>
           <div className="flex items-center gap-4">
             <span className="hidden text-sm text-muted sm:inline">

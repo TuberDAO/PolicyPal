@@ -2,18 +2,25 @@ import Link from "next/link";
 import { PRICING, TURNAROUND, FLAGS } from "@/constants";
 
 const FULL_CASE_INCLUDES = [
-  "Full review of your situation",
-  "Step-by-step action plan",
-  "Who to contact and in what order",
-  "Escalation targets when needed, including specific names, departments, and decision makers",
-  "Draft wording for calls, letters, and emails",
-  "A plan you can check off step by step",
+  "Custom review of your case",
+  "A stronger case built on the right rules and evidence",
+  "Exact next steps based on your situation",
+  "Who to contact and what to say",
+  "Custom wording for calls, emails, and appeals",
+  "A step by step plan you can follow",
 ];
 
 const QUICK_QUESTION_INCLUDES = [
-  "For a simple question only",
-  "One clear answer to a specific insurance or billing question",
-  "Usually a short written response, not a full case review or action plan",
+  "Best for one clear question",
+  "A direct answer based on your situation",
+  "Short written guidance, not a full review",
+  "Not a case pack or appeal plan",
+];
+
+const RUSH_INCLUDES = [
+  "Everything in the Full Case Pack",
+  "Faster turnaround when time matters",
+  "Best for urgent denials, bills, or deadlines",
 ];
 
 export function PricingSection() {
@@ -115,9 +122,17 @@ export function PricingSection() {
               <p className="mt-2 text-sm text-muted">
                 {TURNAROUND.RUSH_LABEL}
               </p>
-              <p className="mt-4 text-sm text-muted">
-                Same depth as the Full Case Pack, delivered faster.
-              </p>
+              <ul className="mt-5 space-y-2.5">
+                {RUSH_INCLUDES.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-2 text-sm text-muted"
+                  >
+                    <CheckIcon />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
               <div className="mt-auto pt-6">
                 <Link
                   href="/start"
