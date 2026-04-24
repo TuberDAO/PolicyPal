@@ -37,7 +37,7 @@ export function MarketingHeader({
             <>
               <Link
                 href="/dashboard"
-                className="rounded-lg bg-cta px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-cta-hover sm:px-4 sm:py-2"
+                className="rounded-lg bg-cta px-3 py-1.5 text-sm font-medium text-white transition-all duration-200 hover:bg-cta-hover hover:shadow-xl sm:px-4 sm:py-2"
               >
                 Dashboard
               </Link>
@@ -63,9 +63,9 @@ export function MarketingHeader({
               </Link>
               <Link
                 href="/start"
-                className="rounded-lg bg-cta px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-cta-hover sm:px-4 sm:py-2"
+                className="rounded-full bg-cta px-3 py-1.5 text-sm font-medium text-white transition-all duration-200 hover:bg-cta-hover hover:shadow-xl sm:px-4 sm:py-2"
               >
-                Start review
+                Start your case
               </Link>
             </>
           )}

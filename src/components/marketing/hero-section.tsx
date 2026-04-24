@@ -6,12 +6,12 @@ import type { User } from "@supabase/supabase-js";
 // Edit all hero copy here. Do not scatter strings into JSX.
 // ---------------------------------------------------------------------------
 const HERO = {
-  headline: "Need help with a denied claim, medical bill, or insurance problem?",
-  body: "We examine your case and give you a clear, step by step plan to challenge denials, correct billing problems, and push your case forward fast",
+  headline: "Need help with a health insurance problem?",
+  body: "Denials, medical bills, prior authorizations, delays, and other insurance issues. We examine your case and give you a clear, step-by-step plan.",
   reassurance: "One case manager handles your case from start to finish.",
   cta: {
-    primaryLoggedIn: "Start a new case",
-    primaryLoggedOut: "Start your review",
+    primaryLoggedIn: "Start your case",
+    primaryLoggedOut: "Start your case",
     secondary: "View current cases",
   },
 } as const;
@@ -62,7 +62,7 @@ export function HeroSection({ user }: { user: User | null }) {
       <div className="relative mx-auto grid max-w-6xl grid-cols-1 px-4 sm:px-6 lg:grid-cols-[3fr_2fr] lg:items-end">
 
         {/* ── Left column — copy + CTAs ── */}
-        <div className="flex flex-col pb-12 pt-16 sm:pb-14 sm:pt-20 lg:pb-16 lg:pt-24 lg:pr-14">
+        <div className="flex flex-col pb-4 pt-16 sm:pb-14 sm:pt-20 lg:pb-16 lg:pt-24 lg:pr-14">
           <h1 className="text-3xl font-semibold leading-tight tracking-tight text-foreground sm:text-4xl lg:text-[2.65rem] lg:leading-[1.18]">
             {HERO.headline}
           </h1>
@@ -77,7 +77,7 @@ export function HeroSection({ user }: { user: User | null }) {
               <>
                 <Link
                   href="/case/new"
-                  className="inline-flex items-center justify-center rounded-lg bg-cta px-6 py-3 text-base font-medium text-white transition-colors hover:bg-cta-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta"
+                  className="inline-flex items-center justify-center rounded-full bg-cta px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-cta-hover hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta"
                 >
                   {HERO.cta.primaryLoggedIn}
                 </Link>
@@ -91,7 +91,7 @@ export function HeroSection({ user }: { user: User | null }) {
             ) : (
               <Link
                 href="/start"
-                className="inline-flex w-fit items-center justify-center rounded-lg bg-cta px-7 py-3 text-base font-medium text-white transition-colors hover:bg-cta-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta"
+                className="inline-flex w-fit items-center justify-center rounded-full bg-cta px-7 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-cta-hover hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta"
               >
                 {HERO.cta.primaryLoggedOut}
               </Link>
@@ -165,7 +165,7 @@ export function HeroSection({ user }: { user: User | null }) {
          * stays stable even though the image is wider than the column (the
          * transparent-left overhang is invisible against the hero background).
          */}
-        <div className="flex min-w-0 items-end justify-center pt-4 lg:justify-end lg:pt-0">
+        <div className="flex min-w-0 items-end justify-center pt-0 lg:justify-end lg:pt-0">
           <Image
             src={PORTRAIT.src}
             alt={PORTRAIT.alt}
