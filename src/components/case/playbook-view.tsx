@@ -1,8 +1,42 @@
 "use client";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import type { PlaybookContent, PlaybookBlock } from "@/types/playbook";
+import type {
+  PlaybookContent,
+  PlaybookBlock,
+  PlaybookBlockType,
+} from "@/types/playbook";
 import { BLOCK_TYPE_LABELS } from "@/types/playbook";
+
+const COMPLETION_LABELS: Record<
+  PlaybookBlockType,
+  { incomplete: string; complete: string }
+> = {
+  action_step: {
+    incomplete: "Mark done",
+    complete: "Done. Tap to undo",
+  },
+  phone_script: {
+    incomplete: "Mark call complete",
+    complete: "Call complete. Tap to undo",
+  },
+  email_script: {
+    incomplete: "Mark email sent",
+    complete: "Email sent. Tap to undo",
+  },
+  portal_message: {
+    incomplete: "Mark message sent",
+    complete: "Message sent. Tap to undo",
+  },
+  letter_wording: {
+    incomplete: "Mark letter sent",
+    complete: "Letter sent. Tap to undo",
+  },
+  guidance_note: {
+    incomplete: "Mark as read",
+    complete: "Read. Tap to undo",
+  },
+};
 
 /* ------------------------------------------------------------------ */
 /*  Completion tracking (localStorage)                                 */
@@ -67,23 +101,27 @@ function useBlockCompletion(caseId: string, trackableIds: string[]) {
 /* ------------------------------------------------------------------ */
 
 function CompletionButton({
+  blockType,
   isDone,
   onToggle,
 }: {
+  blockType: PlaybookBlockType;
   isDone: boolean;
   onToggle: () => void;
 }) {
+  const labels = COMPLETION_LABELS[blockType];
   return (
     <button
       type="button"
       onClick={onToggle}
+      aria-pressed={isDone}
       className={`mt-3 w-full rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
         isDone
           ? "bg-green-100 text-green-800 border border-green-300 hover:bg-green-200"
           : "bg-accent-light text-accent border border-accent/20 hover:bg-accent/10"
       }`}
     >
-      {isDone ? "Done. Tap to undo" : "Mark done"}
+      {isDone ? labels.complete : labels.incomplete}
     </button>
   );
 }
@@ -148,7 +186,11 @@ function ActionStepBlock({
         )}
       </div>
       {block.trackCompletion && loaded && (
-        <CompletionButton isDone={isDone} onToggle={onToggle} />
+        <CompletionButton
+          blockType={block.type}
+          isDone={isDone}
+          onToggle={onToggle}
+        />
       )}
     </div>
   );
@@ -190,7 +232,11 @@ function ScriptBlock({
         {block.content}
       </pre>
       {block.trackCompletion && loaded && (
-        <CompletionButton isDone={isDone} onToggle={onToggle} />
+        <CompletionButton
+          blockType={block.type}
+          isDone={isDone}
+          onToggle={onToggle}
+        />
       )}
     </div>
   );
@@ -220,7 +266,11 @@ function GuidanceBlock({
         {block.content}
       </p>
       {block.trackCompletion && loaded && (
-        <CompletionButton isDone={isDone} onToggle={onToggle} />
+        <CompletionButton
+          blockType={block.type}
+          isDone={isDone}
+          onToggle={onToggle}
+        />
       )}
     </div>
   );

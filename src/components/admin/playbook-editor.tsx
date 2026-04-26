@@ -17,11 +17,11 @@ function genId() {
 
 const BLOCK_DEFAULTS: Record<PlaybookBlockType, Partial<PlaybookBlock>> = {
   action_step: { trackCompletion: true, label: "", content: "" },
-  phone_script: { trackCompletion: false, label: "", content: "" },
-  email_script: { trackCompletion: false, label: "", content: "" },
-  portal_message: { trackCompletion: false, label: "", content: "" },
-  letter_wording: { trackCompletion: false, label: "", content: "" },
-  guidance_note: { trackCompletion: false, label: "", content: "" },
+  phone_script: { trackCompletion: true, label: "", content: "" },
+  email_script: { trackCompletion: true, label: "", content: "" },
+  portal_message: { trackCompletion: true, label: "", content: "" },
+  letter_wording: { trackCompletion: true, label: "", content: "" },
+  guidance_note: { trackCompletion: true, label: "", content: "" },
 };
 
 /* ------------------------------------------------------------------ */

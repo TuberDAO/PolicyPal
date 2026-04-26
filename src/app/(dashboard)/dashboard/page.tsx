@@ -10,6 +10,13 @@ import {
 
 export const metadata: Metadata = { title: "Dashboard" };
 
+/** Customer-facing overrides for specific statuses. All other statuses fall
+ *  back to the shared CASE_STATUS_LABELS map. Do not edit the shared map. */
+const CUSTOMER_STATUS_LABEL_OVERRIDES: Record<string, string> = {
+  draft: "Not submitted yet",
+  complete: "Case pack ready",
+};
+
 export default async function DashboardPage({
   searchParams,
 }: {
@@ -202,7 +209,7 @@ export default async function DashboardPage({
                           </p>
                         </div>
                         <span className="shrink-0 rounded-full border border-border bg-surface px-2.5 py-0.5 text-xs font-medium text-muted">
-                          Draft
+                          {CUSTOMER_STATUS_LABEL_OVERRIDES.draft}
                         </span>
                       </div>
                       <div className="mt-3 flex items-center gap-3">
@@ -273,7 +280,9 @@ export default async function DashboardPage({
                             </span>
                           ) : (
                             <span className="shrink-0 rounded-full bg-accent-light px-2.5 py-0.5 text-xs font-medium text-accent">
-                              {CASE_STATUS_LABELS[c.status] ?? c.status}
+                              {CUSTOMER_STATUS_LABEL_OVERRIDES[c.status] ??
+                                CASE_STATUS_LABELS[c.status] ??
+                                c.status}
                             </span>
                           )}
                         </div>
