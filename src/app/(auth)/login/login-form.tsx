@@ -28,7 +28,7 @@ export function LoginForm({ next, authError }: LoginFormProps) {
     const supabase = createClient();
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: callbackUrl },
+      options: { redirectTo: callbackUrl, queryParams: { prompt: "select_account" } },
     });
 
     if (oauthError) {
