@@ -135,6 +135,10 @@ export function IntakeForm({ draft, onFieldChange, onBack }: IntakeFormProps) {
         ))}
       </div>
 
+      <p className="mt-3 text-xs text-muted">
+        Your draft is saved when you press Save and continue.
+      </p>
+
       <div className="mt-8 space-y-6">
         {/* State — required */}
         <FieldGroup label="State" error={submitted ? errors.state : undefined}>
@@ -265,7 +269,7 @@ export function IntakeForm({ draft, onFieldChange, onBack }: IntakeFormProps) {
           onClick={handleContinue}
           className="w-full rounded-lg bg-cta px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-cta-hover"
         >
-          Continue
+          Save and continue
         </button>
       </div>
     </div>
