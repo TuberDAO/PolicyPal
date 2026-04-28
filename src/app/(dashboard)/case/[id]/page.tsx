@@ -163,9 +163,14 @@ export default async function CaseDetailPage({
 
       {isSubmitted && (
         <div className="space-y-3 rounded-lg border border-border bg-surface p-5">
-          <h2 className="text-sm font-medium uppercase tracking-wide text-muted">
-            Updates
-          </h2>
+          <div className="flex items-baseline justify-between gap-4">
+            <h2 className="text-sm font-medium uppercase tracking-wide text-muted">
+              Updates
+            </h2>
+            <p className="text-xs text-muted">
+              Refresh the page to check for new messages.
+            </p>
+          </div>
           <CustomerThread caseId={c.id} messages={thread} canReply={canReply} />
         </div>
       )}

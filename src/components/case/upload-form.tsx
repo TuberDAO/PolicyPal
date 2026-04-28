@@ -318,8 +318,8 @@ export function UploadForm({ caseId, existingFiles, onDeleteFile }: UploadFormPr
           Upload Documents
         </h1>
         <p className="text-sm leading-relaxed text-muted">
-          Supporting documents help our team review your case faster. Uploads
-          are optional&nbsp;&mdash; you can skip this step.
+          Supporting documents help our team review your case faster. If you do
+          not have documents ready, you can continue without uploading.
         </p>
       </div>
 

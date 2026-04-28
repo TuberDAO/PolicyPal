@@ -102,7 +102,7 @@ function BlockEditor({
         placeholder={isAction ? "What to do" : "Content"}
         value={block.content}
         onChange={(e) => up("content", e.target.value)}
-        rows={isAction ? 2 : 4}
+        rows={isAction ? 3 : 6}
         className={`w-full rounded border border-border bg-surface px-2 py-1 text-sm resize-y ${isScript ? "font-mono" : ""}`}
       />
 
@@ -119,7 +119,7 @@ function BlockEditor({
             placeholder="What to ask for or say (optional)"
             value={block.whatToSay ?? ""}
             onChange={(e) => up("whatToSay", e.target.value)}
-            rows={2}
+            rows={3}
             className="w-full rounded border border-border bg-surface px-2 py-1 text-sm resize-y"
           />
           <input
@@ -358,7 +358,7 @@ export function PlaybookEditor({
           onChange={(e) =>
             setContent((c) => ({ ...c, summary: e.target.value }))
           }
-          rows={3}
+          rows={5}
           placeholder="A short opening block that explains the customer's issue clearly."
           className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm resize-y"
         />
@@ -374,7 +374,7 @@ export function PlaybookEditor({
           onChange={(e) =>
             setContent((c) => ({ ...c, planSummary: e.target.value }))
           }
-          rows={3}
+          rows={5}
           placeholder="A short overview explaining the recommended path and why."
           className="w-full rounded-md border border-border bg-surface px-3 py-2 text-sm resize-y"
         />

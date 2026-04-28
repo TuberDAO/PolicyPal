@@ -264,6 +264,10 @@ export function IntakeForm({ draft, onFieldChange, onBack }: IntakeFormProps) {
           </div>
         </div>
 
+        <p className="rounded-lg border border-border bg-surface px-4 py-3 text-sm text-muted">
+          You can upload documents on the next page after saving.
+        </p>
+
         <button
           type="button"
           onClick={handleContinue}

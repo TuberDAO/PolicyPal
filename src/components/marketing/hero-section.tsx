@@ -7,7 +7,7 @@ import type { User } from "@supabase/supabase-js";
 // ---------------------------------------------------------------------------
 const HERO = {
   headline: "Need help with a health insurance problem?",
-  body: "Denials, medical bills, prior authorizations, delays, and other insurance issues. We examine your case and give you a clear, step-by-step plan.",
+  body: "Denials, medical bills, prior authorizations, delays, and other insurance issues. We examine your case and give you a clear action plan to help get it resolved faster.",
   reassurance: "One case manager handles your case from start to finish.",
   cta: {
     primaryLoggedIn: "Start your case",
