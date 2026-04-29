@@ -7,8 +7,8 @@ export default function TermsPage() {
     <div className="mx-auto max-w-3xl px-6 py-16 space-y-10">
       <div className="space-y-2">
         <h1 className="text-3xl font-semibold tracking-tight">Terms of Service for WinYourAppeal</h1>
-        <p className="text-sm text-muted">Effective Date: [INSERT DATE]</p>
-        <p className="text-sm text-muted">Last Updated: [INSERT DATE]</p>
+        <p className="text-sm text-muted">Effective Date: April 29, 2026</p>
+        <p className="text-sm text-muted">Last Updated: April 29, 2026</p>
       </div>
 
       <p>
@@ -311,9 +311,7 @@ export default function TermsPage() {
         <p>If you have questions about these Terms, contact us at:</p>
         <address className="not-italic space-y-1">
           <p>WinYourAppeal</p>
-          <p>[LEGAL ENTITY NAME]</p>
-          <p>[BUSINESS ADDRESS]</p>
-          <p>[SUPPORT EMAIL]</p>
+          <p>Email: sill.namson@gmx.com</p>
         </address>
       </Section>
     </div>
