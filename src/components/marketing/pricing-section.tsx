@@ -2,25 +2,27 @@ import Link from "next/link";
 import { PRICING, TURNAROUND, FLAGS } from "@/constants";
 
 const FULL_CASE_INCLUDES = [
-  "Custom review of your case",
-  "A stronger case built on the right rules and evidence",
-  "Exact next steps based on your situation",
-  "Who to contact and what to say",
-  "Custom wording for calls, emails, and appeals",
-  "A step by step plan you can follow",
+  "Detailed case assessment",
+  "Reviewed by a trained case manager",
+  "Built around your exact problem",
+  "Plan to challenge or fix the issue",
+  "Fastest practical next steps",
+  "Who to contact and what to ask",
+  "Wording for calls and messages",
+  "Steps to push your case forward",
 ];
 
 const QUICK_QUESTION_INCLUDES = [
-  "Best for one clear question",
-  "A direct answer based on your situation",
-  "Short written guidance, not a full review",
-  "Not a case pack or appeal plan",
+  "Best for one clear issue",
+  "Direct answer for your situation",
+  "Focused written guidance",
+  "A clear next step",
 ];
 
 const RUSH_INCLUDES = [
-  "Everything in the Full Case Pack",
-  "Faster turnaround when time matters",
-  "Best for urgent denials, bills, or deadlines",
+  "Full Case Pack included",
+  "Faster review when time matters",
+  "Best for urgent deadlines",
 ];
 
 export function PricingSection() {
