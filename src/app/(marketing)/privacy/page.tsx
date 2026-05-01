@@ -12,7 +12,7 @@ export default function PrivacyPage() {
       </div>
 
       <p>
-        WinYourAppeal, operated by [LEGAL ENTITY NAME] (&ldquo;WinYourAppeal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), provides a U.S.&#8209;focused service that helps people understand, organize, and respond to health insurance and medical billing issues. This Privacy Policy explains how we collect, use, disclose, retain, and protect personal information when you visit our website, create an account, submit or save a case, upload documents, purchase services, contact us, or otherwise use WinYourAppeal.
+        WinYourAppeal, operated by LucidPath Labs Ltd (&ldquo;WinYourAppeal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), provides a U.S.&#8209;focused service that helps people understand, organize, and respond to health insurance and medical billing issues. This Privacy Policy explains how we collect, use, disclose, retain, and protect personal information when you visit our website, create an account, submit or save a case, upload documents, purchase services, contact us, or otherwise use WinYourAppeal.
       </p>
       <p>
         Because WinYourAppeal may involve insurance, billing, and health&#8209;related materials, some of the information we handle may be sensitive personal information and, in some states, consumer health data.
