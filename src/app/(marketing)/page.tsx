@@ -52,7 +52,7 @@ export default async function HomePage() {
             href="/start"
             className="mt-6 inline-block rounded-lg bg-cta px-8 py-3.5 text-base font-medium text-white transition-colors hover:bg-cta-hover"
           >
-            Start your review
+            Get your action plan
           </Link>
         )}
       </section>

@@ -65,7 +65,7 @@ export function MarketingHeader({
                 href="/start"
                 className="rounded-full bg-cta px-3 py-1.5 text-sm font-medium text-white transition-all duration-200 hover:bg-cta-hover hover:shadow-xl sm:px-4 sm:py-2"
               >
-                Start your case
+                Get help now
               </Link>
             </>
           )}

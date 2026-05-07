@@ -3,9 +3,9 @@ import { PRICING, TURNAROUND, FLAGS } from "@/constants";
 
 const FULL_CASE_INCLUDES = [
   "Detailed case assessment",
-  "Reviewed by a trained case manager",
+  "Examined by a trained specialist",
   "Built around your exact problem",
-  "Plan to challenge or fix the issue",
+  "Action plan to challenge, fix, or move the issue forward",
   "Fastest practical next steps",
   "Who to contact and what to ask",
   "Wording for calls and messages",
@@ -20,7 +20,7 @@ const QUICK_QUESTION_INCLUDES = [
 ];
 
 const RUSH_INCLUDES = [
-  "Full Case Pack included",
+  "Full Action Plan included",
   "Faster review when time matters",
   "Best for urgent deadlines",
 ];
@@ -73,13 +73,13 @@ export function PricingSection() {
             </div>
           )}
 
-          {/* Full Case Pack — primary */}
+          {/* Full Action Plan — primary */}
           <div className="relative flex flex-col rounded-2xl border-2 border-accent bg-surface p-6 shadow-md">
             <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-0.5 text-xs font-semibold text-white">
               Most popular
             </span>
             <h3 className="font-heading text-lg font-semibold">
-              Full Case Pack
+              Full Action Plan
             </h3>
             <div className="mt-3 flex items-baseline gap-2">
               <span className="text-3xl font-bold">
@@ -105,16 +105,16 @@ export function PricingSection() {
                 href="/start"
                 className="block rounded-lg bg-cta px-4 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-cta-hover"
               >
-                Start your review
+                Get your action plan
               </Link>
             </div>
           </div>
 
-          {/* Rush Review */}
+          {/* Rush Action Plan */}
           {FLAGS.RUSH_ENABLED && (
             <div className="flex flex-col rounded-2xl border border-border bg-surface p-6 shadow-sm">
               <h3 className="font-heading text-lg font-semibold">
-                Rush Review
+                Rush Action Plan
               </h3>
               <div className="mt-3">
                 <span className="text-3xl font-bold">
@@ -140,7 +140,7 @@ export function PricingSection() {
                   href="/start"
                   className="block rounded-lg border border-border px-4 py-2.5 text-center text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:bg-accent-light"
                 >
-                  Start your review
+                  Get your action plan
                 </Link>
               </div>
             </div>

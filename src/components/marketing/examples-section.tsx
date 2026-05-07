@@ -43,17 +43,17 @@ export function ExamplesSection() {
   const active = ROWS[activeIndex];
 
   return (
-    <section id="examples" className="px-4 py-16 sm:px-6 sm:py-20" aria-label="What we build into your case">
+    <section id="examples" className="px-4 py-16 sm:px-6 sm:py-20" aria-label="What we build into your action plan">
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-14">
 
           {/* ── Left column ── */}
           <div>
             <h2 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
-              What we build into your case
+              What we build into your action plan
             </h2>
             <p className="mt-4 max-w-lg text-base leading-relaxed text-muted">
-              WinYourAppeal builds a stronger case using your documented condition, clinical evidence, coverage criteria, and the state and federal rules that govern how your claim should be reviewed.
+              WinYourAppeal builds a stronger action plan using your documents, the reason given by the insurer or billing office, relevant coverage criteria, and the practical steps that may help move your issue forward.
             </p>
 
             <div className="mt-8 flex flex-col" role="tablist" aria-label="Case components">

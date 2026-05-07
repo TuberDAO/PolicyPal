@@ -6,12 +6,14 @@ import type { User } from "@supabase/supabase-js";
 // Edit all hero copy here. Do not scatter strings into JSX.
 // ---------------------------------------------------------------------------
 const HERO = {
-  headline: "Need help with a health insurance problem?",
-  body: "Denials, medical bills, prior authorizations, delays, and other insurance issues. We examine your case and give you a clear action plan to help get it resolved faster.",
-  reassurance: "One case manager handles your case from start to finish.",
+  headline: "Health insurance problem?",
+  subheadline:
+    "Denied claim, refused medication, delayed prior auth, wrong bill, or insurer runaround?",
+  body: "Stop guessing. WinYourAppeal examines what happened and gives you a clear plan to move your issue forward fast: who to contact, what to ask, what to send, and what to say.",
+  reassurance: "One specialist handles your issue from start to finish.",
   cta: {
-    primaryLoggedIn: "Start your case",
-    primaryLoggedOut: "Start your case",
+    primaryLoggedIn: "Get help now",
+    primaryLoggedOut: "Get help now",
     secondary: "View current cases",
   },
 } as const;
@@ -67,7 +69,11 @@ export function HeroSection({ user }: { user: User | null }) {
             {HERO.headline}
           </h1>
 
-          <p className="mt-5 max-w-[36rem] text-base leading-relaxed text-muted text-pretty sm:text-lg">
+          <p className="mt-4 max-w-[36rem] text-base font-medium text-foreground text-pretty sm:text-lg">
+            {HERO.subheadline}
+          </p>
+
+          <p className="mt-3 max-w-[36rem] text-base leading-relaxed text-muted text-pretty sm:text-lg">
             {HERO.body}
           </p>
 
@@ -143,7 +149,7 @@ export function HeroSection({ user }: { user: User | null }) {
               <svg aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-accent" viewBox="0 0 20 20" fill="currentColor">
                 <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
               </svg>
-              Reviewed by an experienced case specialist
+              Examined by an experienced specialist
             </span>
           </div>
         </div>

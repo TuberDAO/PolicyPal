@@ -62,7 +62,7 @@ const FAQS: { question: string; answer: string | string[] }[] = [
       "If we need more information, your case will show that action is needed. You will also get an email letting you know there is an update. You can log in, read the request, and reply directly in the platform so we can continue the review.",
   },
   {
-    question: "How do I know when my case is ready?",
+    question: "How do I know when my action plan is ready?",
     answer:
       "We will send you an email when your case is ready. Your completed plan will also appear in your account so you can log in and view it there.",
   },
