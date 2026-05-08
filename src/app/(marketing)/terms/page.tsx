@@ -12,7 +12,7 @@ export default function TermsPage() {
       </div>
 
       <p>
-        These Terms of Service govern your access to and use of WinYourAppeal, operated by LucidPath Labs Ltd (&ldquo;WinYourAppeal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;). By visiting the site, creating an account, submitting a case, purchasing a service, uploading materials, contacting us, or otherwise using WinYourAppeal, you agree to these Terms.
+        These Terms of Service govern your access to and use of WinYourAppeal, operated by Path Ltd (&ldquo;WinYourAppeal,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;). By visiting the site, creating an account, submitting a case, purchasing a service, uploading materials, contacting us, or otherwise using WinYourAppeal, you agree to these Terms.
       </p>
       <p>If you do not agree to these Terms, do not use WinYourAppeal.</p>
 
@@ -313,7 +313,7 @@ export default function TermsPage() {
           <p>WinYourAppeal</p>
           <p>Email: sill.namson@gmx.com</p>
         </address>
-        <p>WinYourAppeal is a trading name of LucidPath Labs Ltd, a company registered in England and Wales.</p>
+        <p>WinYourAppeal is a trading name of Path Ltd, a company registered in England and Wales.</p>
       </Section>
     </div>
   );
