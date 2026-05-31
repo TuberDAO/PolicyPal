@@ -313,7 +313,6 @@ export default function TermsPage() {
           <p>WinYourAppeal</p>
           <p>Email: wyaadmin@gmx.com</p>
         </address>
-        <p>WinYourAppeal is a trading name of Path Ltd, a company registered in England and Wales.</p>
       </Section>
     </div>
   );

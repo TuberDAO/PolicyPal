@@ -419,7 +419,6 @@ export default function PrivacyPage() {
           <p>WinYourAppeal</p>
           <p>Email: wyaadmin@gmx.com</p>
         </address>
-        <p>WinYourAppeal is a trading name of LucidPath Labs Ltd, a company registered in England and Wales.</p>
       </Section>
     </div>
   );
