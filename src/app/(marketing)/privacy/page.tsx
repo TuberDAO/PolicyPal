@@ -281,9 +281,9 @@ export default function PrivacyPage() {
         <p>
           If you submit a request, we may take reasonable steps to verify your identity or authority before acting on it. If you act for another person, we may ask for proof of authorization.
         </p>
-        <p>You may submit privacy requests to: sill.namson@gmx.com</p>
+        <p>You may submit privacy requests to: wyaadmin@gmx.com</p>
         <p>
-          If we deny your request, you may appeal by contacting us at sill.namson@gmx.com with the subject line <em>Privacy Appeal</em>.
+          If we deny your request, you may appeal by contacting us at wyaadmin@gmx.com with the subject line <em>Privacy Appeal</em>.
         </p>
       </Section>
 
@@ -315,7 +315,7 @@ export default function PrivacyPage() {
         <p>
           Where required by law, you may have rights to confirm whether we collect, share, or sell consumer health data, access such data, withdraw consent, and request deletion. If applicable law requires deletion from our network, we will process qualifying requests in accordance with that law.
         </p>
-        <p>To submit a Washington consumer health data request, contact: sill.namson@gmx.com</p>
+        <p>To submit a Washington consumer health data request, contact: wyaadmin@gmx.com</p>
       </Section>
 
       <Section title="13. California privacy rights">
@@ -331,7 +331,7 @@ export default function PrivacyPage() {
           <li>not being discriminated against for exercising privacy rights</li>
         </ul>
         <p>We do not sell personal information for money and do not use private case file data for targeted advertising.</p>
-        <p>To submit a California privacy request, contact: sill.namson@gmx.com</p>
+        <p>To submit a California privacy request, contact: wyaadmin@gmx.com</p>
         <p>We may verify your identity before processing a request, and we may deny or limit requests where permitted by law.</p>
       </Section>
 
@@ -340,7 +340,7 @@ export default function PrivacyPage() {
           If Nevada law applies to your information, we may collect, use, and disclose consumer health data described in this Privacy Policy to provide the service, maintain and secure the platform, process payments, respond to requests, and comply with legal obligations.
         </p>
         <p>
-          Where applicable, Nevada residents may have rights relating to access, deletion, and control over certain disclosures of consumer health data. To submit a Nevada privacy request, contact: sill.namson@gmx.com
+          Where applicable, Nevada residents may have rights relating to access, deletion, and control over certain disclosures of consumer health data. To submit a Nevada privacy request, contact: wyaadmin@gmx.com
         </p>
       </Section>
 
@@ -349,7 +349,7 @@ export default function PrivacyPage() {
           If Connecticut law applies to your information, we may collect and process health&#8209;related personal data described in this Privacy Policy to provide the service you requested, manage and secure the platform, communicate with you about your case, process transactions, and comply with law.
         </p>
         <p>
-          Where applicable, Connecticut residents may have rights to access, correct, delete, and obtain a copy of certain personal data, as well as rights to appeal certain decisions about privacy requests. To submit a Connecticut privacy request, contact: sill.namson@gmx.com
+          Where applicable, Connecticut residents may have rights to access, correct, delete, and obtain a copy of certain personal data, as well as rights to appeal certain decisions about privacy requests. To submit a Connecticut privacy request, contact: wyaadmin@gmx.com
         </p>
       </Section>
 
@@ -357,7 +357,7 @@ export default function PrivacyPage() {
         <p>
           Depending on your state of residence and applicable law, you may have rights that include access, correction, deletion, portability, appeal, and limits on certain uses or disclosures of sensitive information.
         </p>
-        <p>To submit a privacy request under applicable state law, contact: sill.namson@gmx.com</p>
+        <p>To submit a privacy request under applicable state law, contact: wyaadmin@gmx.com</p>
         <p>We may verify your identity before processing a request, and we may deny or limit requests where permitted by law.</p>
       </Section>
 
@@ -417,7 +417,7 @@ export default function PrivacyPage() {
         <p>If you have questions, concerns, or privacy requests, contact us at:</p>
         <address className="not-italic space-y-1">
           <p>WinYourAppeal</p>
-          <p>Email: sill.namson@gmx.com</p>
+          <p>Email: wyaadmin@gmx.com</p>
         </address>
         <p>WinYourAppeal is a trading name of LucidPath Labs Ltd, a company registered in England and Wales.</p>
       </Section>

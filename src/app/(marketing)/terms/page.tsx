@@ -311,7 +311,7 @@ export default function TermsPage() {
         <p>If you have questions about these Terms, contact us at:</p>
         <address className="not-italic space-y-1">
           <p>WinYourAppeal</p>
-          <p>Email: sill.namson@gmx.com</p>
+          <p>Email: wyaadmin@gmx.com</p>
         </address>
         <p>WinYourAppeal is a trading name of Path Ltd, a company registered in England and Wales.</p>
       </Section>
